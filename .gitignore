@@ -1,0 +1,22 @@
+# User Specific Ignores
+Docs/
+Prompts/
+Legal_Documents/*.pdf
+backend/uploads/
+
+# Environments & Secrets
+.env
+*.env
+backend/.env
+frontend/.env
+
+# Python
+__pycache__/
+*.pyc
+backend/legal_assistant.db
+backend/chroma_store/
+.venv/
+
+# Node
+node_modules/
+frontend/dist/
