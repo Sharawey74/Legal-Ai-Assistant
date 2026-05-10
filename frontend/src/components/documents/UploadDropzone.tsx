@@ -37,7 +37,11 @@ export default function UploadDropzone({ onUploaded }: Props) {
       setTimeout(() => { setUploading(false); setProgress(0); }, 400);
       onUploaded(doc);
     } catch (e: any) {
-      setError(e.response?.data?.detail ?? "Upload failed");
+      const detail = e.response?.data?.detail;
+      const errMsg = Array.isArray(detail) 
+        ? detail[0]?.msg || "Validation error" 
+        : (typeof detail === "string" ? detail : "Upload failed");
+      setError(errMsg);
       setUploading(false);
       setProgress(0);
     } finally {

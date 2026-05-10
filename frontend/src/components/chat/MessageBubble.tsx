@@ -5,8 +5,18 @@ interface Props {
   onViewSources: (citations: Citation[]) => void;
 }
 
+import ReactMarkdown from "react-markdown";
+
 export default function MessageBubble({ message, onViewSources }: Props) {
   const isUser = message.role === "user";
+
+  const formattedContent = !isUser 
+    ? message.content
+        .replace(/<think>([\s\S]*?)<\/think>/g, (_, p1) => 
+          '> **💭 AI Reasoning Process:**\n' + p1.split('\n').map((l: string) => `> ${l}`).join('\n') + '\n\n'
+        )
+        .replace(/\[Doc:\s*(.*?),\s*Page:\s*(\d+)\]/g, '[Doc: $1, Page: $2](#citation)')
+    : message.content;
 
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-5 group`}>
@@ -33,7 +43,30 @@ export default function MessageBubble({ message, onViewSources }: Props) {
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-t-2xl" />
           )}
 
-          <p className="whitespace-pre-wrap">{message.content}</p>
+          {isUser ? (
+            <p className="whitespace-pre-wrap">{message.content}</p>
+          ) : (
+            <div className="markdown-prose">
+              <ReactMarkdown
+                components={{
+                  strong: ({node, ...props}) => <strong className="font-semibold text-white" {...props} />,
+                  ul: ({node, ...props}) => <ul className="list-disc pl-5 space-y-1 text-slate-300" {...props} />,
+                  p: ({node, ...props}) => <p className="mb-3 text-slate-300 leading-relaxed last:mb-0" {...props} />,
+                  h2: ({node, ...props}) => <h3 className="text-white font-semibold text-base mb-1 mt-4" {...props} />,
+                  h3: ({node, ...props}) => <h3 className="text-white font-semibold text-base mb-1 mt-4" {...props} />,
+                  a: ({node, href, children, ...props}) => {
+                    if (href === "#citation") {
+                      return <span className="inline-flex items-center bg-indigo-900 text-indigo-300 text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full mx-1 border border-indigo-500/30">{children}</span>;
+                    }
+                    return <a href={href} className="text-indigo-400 hover:underline" {...props}>{children}</a>;
+                  },
+                  blockquote: ({node, ...props}) => <blockquote className="border-l-2 border-indigo-500/50 pl-4 py-2 my-3 bg-indigo-500/5 text-indigo-200/80 text-xs italic rounded-r-lg" {...props} />
+                }}
+              >
+                {formattedContent}
+              </ReactMarkdown>
+            </div>
+          )}
 
           {/* Citations button */}
           {!isUser && message.citations.length > 0 && (

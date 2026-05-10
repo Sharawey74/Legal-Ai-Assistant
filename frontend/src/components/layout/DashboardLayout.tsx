@@ -24,13 +24,13 @@ export default function DashboardLayout({ children, noPadding = false }: Props) 
       <nav className="hidden md:flex flex-col fixed left-0 top-0 h-screen w-64 bg-[#080f1e] border-r border-white/5 z-50 shrink-0">
 
         {/* Brand */}
-        <div className="px-6 py-7 border-b border-white/5">
+        <div className="px-6 py-10 border-b border-white/5">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-              <span className="material-symbols-outlined text-white text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <span className="material-symbols-outlined text-white text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
             </div>
             <div>
-              <p className="text-sm font-bold tracking-tight text-white">LexIntelligence</p>
+              <p className="text-lg font-bold tracking-tight text-white">LexIntelligence</p>
               <p className="text-[10px] text-slate-500 font-medium tracking-wider uppercase mt-0.5">Enterprise Legal AI</p>
             </div>
           </div>

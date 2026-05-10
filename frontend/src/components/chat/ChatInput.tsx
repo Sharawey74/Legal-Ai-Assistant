@@ -1,12 +1,13 @@
 import { useState, type KeyboardEvent, useRef, useEffect } from "react";
 
 interface Props {
-  onSend: (content: string) => void;
+  onSend: (content: string, isThinkingMode: boolean) => void;
   disabled: boolean;
 }
 
 export default function ChatInput({ onSend, disabled }: Props) {
   const [value, setValue] = useState("");
+  const [isThinkingMode, setIsThinkingMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Auto-resize textarea
@@ -20,7 +21,7 @@ export default function ChatInput({ onSend, disabled }: Props) {
   function submit() {
     const trimmed = value.trim();
     if (!trimmed || disabled) return;
-    onSend(trimmed);
+    onSend(trimmed, isThinkingMode);
     setValue("");
   }
 
@@ -59,6 +60,24 @@ export default function ChatInput({ onSend, disabled }: Props) {
           placeholder="Ask a legal question about your documents… (Ctrl+Enter to send)"
           className="flex-1 resize-none bg-transparent text-sm text-white placeholder:text-slate-600 outline-none leading-relaxed disabled:cursor-not-allowed max-h-48 overflow-y-auto py-1 px-2"
         />
+
+        {/* Thinking Mode Toggle */}
+        <button
+          onClick={() => setIsThinkingMode(!isThinkingMode)}
+          disabled={disabled}
+          title="Enable Deep Thinking Mode"
+          className={`
+            shrink-0 w-9 h-9 rounded-xl flex items-center justify-center border transition-all duration-200
+            ${isThinkingMode 
+              ? "bg-indigo-500/20 text-indigo-400 border-indigo-500/50 shadow-inner shadow-indigo-500/20" 
+              : "bg-white/5 text-slate-500 border-white/10 hover:text-indigo-400 hover:border-indigo-500/30 hover:bg-white/10"
+            }
+          `}
+        >
+          <span className="material-symbols-outlined text-[20px]">
+            {isThinkingMode ? "psychology" : "psychology_alt"}
+          </span>
+        </button>
 
         {/* Send button */}
         <button

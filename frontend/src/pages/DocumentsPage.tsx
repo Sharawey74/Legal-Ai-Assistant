@@ -16,8 +16,19 @@ export default function DocumentsPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    const hasProcessing = documents.some(d => d.status === "processing");
+    if (!hasProcessing) return;
+
+    const intervalId = setInterval(() => {
+      listDocuments().then(setDocuments).catch(() => {});
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [documents]);
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pt-10">
       {/* Page header */}
       <div>
         <div className="flex items-center gap-2 mb-2">

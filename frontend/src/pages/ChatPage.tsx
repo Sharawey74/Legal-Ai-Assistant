@@ -7,6 +7,7 @@ import MessageBubble    from "../components/chat/MessageBubble";
 import ChatInput        from "../components/chat/ChatInput";
 import CitationPanel    from "../components/chat/CitationPanel";
 import DocumentSelector from "../components/chat/DocumentSelector";
+import ReactMarkdown    from "react-markdown";
 
 export default function ChatPage() {
   const { sessionId: routeSessionId } = useParams<{ sessionId: string }>();
@@ -19,6 +20,7 @@ export default function ChatPage() {
   // Streaming state
   const [streamingToken, setStreamingToken] = useState<string>("");
   const [isStreaming, setIsStreaming]        = useState(false);
+  const [isContextCollapsed, setIsContextCollapsed] = useState(false);
 
   useEffect(() => {
     dispatch({ type: "CLEAR" });
@@ -43,7 +45,7 @@ export default function ChatPage() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [state.messages, streamingToken]);
 
-  async function handleSend(content: string) {
+  async function handleSend(content: string, isThinkingMode: boolean) {
     if (!state.sessionId && state.selectedDocumentIds.length === 0) {
       alert("Please select at least one document before asking a question.");
       return;
@@ -75,6 +77,7 @@ export default function ChatPage() {
       await streamMessage(
         sid,
         content,
+        isThinkingMode,
         // onToken — append each token to the streaming bubble
         (token) => setStreamingToken(prev => prev + token),
         // onCitations — auto-show citation panel
@@ -106,28 +109,48 @@ export default function ChatPage() {
     <div className="h-full flex bg-[#0b1326] overflow-hidden text-white">
 
       {/* ── Left sidebar: Document Selector ── */}
-      <aside className="hidden md:flex w-72 shrink-0 flex-col border-r border-white/5 bg-[#080f1e] z-10">
-        {/* Header */}
-        <div className="px-5 py-5 border-b border-white/5">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-            <p className="text-xs font-bold tracking-[0.15em] text-indigo-400 uppercase">Active Context</p>
-          </div>
-          <p className="text-xs text-slate-500 leading-relaxed">
-            {state.sessionId
-              ? "Context is locked for this active session."
-              : "Select documents to include in the AI's retrieval pipeline."}
-          </p>
-        </div>
+      <aside 
+        className={`hidden md:flex shrink-0 flex-col border-r border-white/5 bg-[#080f1e] z-20 relative transition-all duration-300 ease-in-out ${
+          isContextCollapsed ? "w-10" : "w-72"
+        }`}
+      >
+        <button 
+          onClick={() => setIsContextCollapsed(!isContextCollapsed)}
+          className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-14 bg-[#080f1e] border border-white/10 rounded-full flex items-center justify-center hover:bg-white/5 hover:border-indigo-500/30 text-slate-400 hover:text-indigo-400 transition-all z-30 shadow-lg"
+        >
+          <span className="material-symbols-outlined text-[18px]">
+            {isContextCollapsed ? "chevron_right" : "chevron_left"}
+          </span>
+        </button>
 
-        {/* Scrollable doc list */}
-        <div className="flex-1 overflow-y-auto py-3 px-3">
-          <DocumentSelector
-            selectedIds={state.selectedDocumentIds}
-            onChange={ids => dispatch({ type: "SET_DOCS", payload: ids })}
-            disabled={!!state.sessionId}
-          />
-        </div>
+        {!isContextCollapsed ? (
+          <>
+            <div className="px-5 pt-10 pb-5 border-b border-white/5 w-72">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+                <p className="text-xs font-bold tracking-[0.15em] text-indigo-400 uppercase">Active Context</p>
+              </div>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                {state.sessionId
+                  ? "Context is locked for this active session."
+                  : "Select documents to include in the AI's retrieval pipeline."}
+              </p>
+            </div>
+
+            <div className="flex-1 overflow-y-auto py-3 px-3 w-72">
+              <DocumentSelector
+                selectedIds={state.selectedDocumentIds}
+                onChange={ids => dispatch({ type: "SET_DOCS", payload: ids })}
+                disabled={!!state.sessionId}
+              />
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center gap-4 text-slate-500 mt-10 h-full w-10">
+            <span className="material-symbols-outlined text-[16px] text-indigo-500/50">inventory_2</span>
+            <span className="text-[10px] font-bold tracking-widest text-indigo-500/50 uppercase rotate-180" style={{ writingMode: 'vertical-rl' }}>Context</span>
+          </div>
+        )}
       </aside>
 
       {/* ── Main Chat Area ── */}
@@ -163,7 +186,7 @@ export default function ChatPage() {
                   ].map(({ icon, text }) => (
                     <button
                       key={text}
-                      onClick={() => handleSend(text)}
+                      onClick={() => handleSend(text, false)}
                       className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/4 hover:bg-white/8 border border-white/8 hover:border-indigo-500/20 text-sm text-slate-400 hover:text-white transition-all duration-200 text-left active:scale-[0.98] group"
                     >
                       <span className="material-symbols-outlined text-[18px] text-slate-600 group-hover:text-indigo-400 transition-colors shrink-0">{icon}</span>
@@ -208,15 +231,38 @@ export default function ChatPage() {
                   <div className="bg-white/5 backdrop-blur-md border border-indigo-500/20 text-slate-200 rounded-2xl rounded-bl-sm px-4 py-3 text-sm leading-relaxed relative">
                     {/* Pulsing indigo top-line while streaming */}
                     <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-indigo-500/60 to-transparent rounded-t-2xl animate-pulse" />
-                    <p className="whitespace-pre-wrap">
-                      {streamingToken || (
+                    <div className="markdown-prose">
+                      {streamingToken ? (
+                        <ReactMarkdown
+                          components={{
+                            strong: ({node, ...props}) => <strong className="font-semibold text-white" {...props} />,
+                            ul: ({node, ...props}) => <ul className="list-disc pl-5 space-y-1 text-slate-300" {...props} />,
+                            p: ({node, ...props}) => <p className="mb-3 text-slate-300 leading-relaxed last:mb-0" {...props} />,
+                            h2: ({node, ...props}) => <h3 className="text-white font-semibold text-base mb-1 mt-4" {...props} />,
+                            h3: ({node, ...props}) => <h3 className="text-white font-semibold text-base mb-1 mt-4" {...props} />,
+                            a: ({node, href, children, ...props}) => {
+                              if (href === "#citation") {
+                                return <span className="inline-flex items-center bg-indigo-900 text-indigo-300 text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full mx-1 border border-indigo-500/30">{children}</span>;
+                              }
+                              return <a href={href} className="text-indigo-400 hover:underline" {...props}>{children}</a>;
+                            },
+                            blockquote: ({node, ...props}) => <blockquote className="border-l-2 border-indigo-500/50 pl-4 py-2 my-3 bg-indigo-500/5 text-indigo-200/80 text-xs italic rounded-r-lg" {...props} />
+                          }}
+                        >
+                          {streamingToken
+                            .replace(/<think>([\s\S]*?)(<\/think>|$)/g, (_, p1) => 
+                              '> **💭 AI Reasoning Process:**\n' + p1.split('\n').map((l: string) => `> ${l}`).join('\n') + '\n\n'
+                            )
+                            .replace(/\[Doc:\s*(.*?),\s*Page:\s*(\d+)\]/g, '[Doc: $1, Page: $2](#citation)')}
+                        </ReactMarkdown>
+                      ) : (
                         <span className="flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "0ms" }} />
                           <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "150ms" }} />
                           <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "300ms" }} />
                         </span>
                       )}
-                    </p>
+                    </div>
                     {/* Blinking cursor while streaming */}
                     {streamingToken && (
                       <span className="inline-block w-0.5 h-4 bg-indigo-400 ml-0.5 align-middle animate-pulse" />
