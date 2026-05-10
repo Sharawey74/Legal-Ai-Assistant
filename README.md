@@ -9,7 +9,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-FF6B35?style=flat-square&logo=databricks&logoColor=white)](https://www.trychroma.com/)
 [![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white)](https://langchain.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-6366f1?style=flat-square)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-6366f1?style=flat-square)](LICENSE)
 </div>
 
 ## 🧭 Overview
@@ -252,6 +252,23 @@ Step 5 — Audit
 - **API keys** live in `.env` only — never committed (`.gitignore` pre-configured to block it)
 - **PDF files** and the `Prompts/` directory are explicitly git-ignored to prevent corpus leaks
 - **Vector data** is stored locally in `/chroma_store` — document text is never sent to third parties during the indexing phase
+
+---
+
+## 👤 Author
+
+**Abdelrhman Mohamed**  
+GitHub: [https://github.com/Sharawey74](https://github.com/Sharawey74)
+
+---
+
+## 📄 License
+
+Licensed under the **Apache License 2.0**.
+
+Copyright © 2026 Abdelrhman Mohamed.
+
+See the [LICENSE](LICENSE) file for details.
 ---
  
 <div align="center">
