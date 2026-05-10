@@ -1,10 +1,18 @@
 # -------------------------------------------------------------------
-# USER SPECIFIC
+# USER SPECIFIC & DATA
 # -------------------------------------------------------------------
 Docs/
 Prompts/
 PDF/
-Legal_Documents/*.pdf
+Legal_Documents/
+*.pdf
+*.docx
+*.csv
+*.md
+!README.md
+!AI_CONTEXT.md
+uploads/
+vector_store/
 
 # -------------------------------------------------------------------
 # ENVIRONMENTS & SECRETS
@@ -15,6 +23,8 @@ Legal_Documents/*.pdf
 !.env.example
 backend/.env
 frontend/.env
+*.pem
+*.key
 
 # -------------------------------------------------------------------
 # BACKEND (Python / FastAPI)
@@ -28,20 +38,29 @@ venv/
 backend/legal_assistant.db
 backend/chroma_store/
 backend/uploads/
+backend/logs/
+*.sqlite
+*.sqlite3
+.pytest_cache/
+.coverage
+htmlcov/
 
 # -------------------------------------------------------------------
 # FRONTEND (Node / Vite / React)
 # -------------------------------------------------------------------
 node_modules/
 frontend/node_modules/
+dist/
 frontend/dist/
 frontend/dist-ssr/
+build/
 frontend/build/
 .eslintcache
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.next/
 
 # -------------------------------------------------------------------
 # OS & IDE
@@ -52,3 +71,5 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+*.log
+
