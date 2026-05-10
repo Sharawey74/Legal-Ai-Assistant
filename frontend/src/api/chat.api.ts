@@ -97,6 +97,8 @@ export async function streamMessage(
       } else if (payload.startsWith("[ERROR]")) {
         onError(payload.slice("[ERROR] ".length).trim());
         return;
+      } else if (payload.startsWith("[TTFT]")) {
+        // Time-to-first-token metric — silently consume, do not display
       } else {
         // Regular token — unescape newlines encoded by backend
         onToken(payload.replace(/\\n/g, "\n"));

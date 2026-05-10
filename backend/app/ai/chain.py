@@ -59,9 +59,10 @@ def stream_rag_chain(query: str, chunks: list[dict], is_thinking_mode: bool = Fa
     Execute the RAG pipeline with token-level streaming.
 
     Yields Server-Sent Events (SSE) formatted strings:
-      - data: <token>\\n\\n          — during generation
+      - data: [TTFT]<ms>\\n\\n         — time-to-first-token (milliseconds), fired once before first token
+      - data: <token>\\n\\n            — during generation
       - data: [CITATIONS]<json>\\n\\n  — after generation (citations payload)
-      - data: [DONE]\\n\\n            — signals end of stream
+      - data: [DONE]\\n\\n             — signals end of stream
     """
     import json
 
@@ -86,8 +87,18 @@ def stream_rag_chain(query: str, chunks: list[dict], is_thinking_mode: bool = Fa
     ]
 
     try:
+        t_stream_start   = time.perf_counter()
+        first_token_sent = False
+
         for token in chain.stream({"context": context, "question": query}):
             if token:
+                # Emit TTFT event exactly once — before the very first content token
+                if not first_token_sent:
+                    ttft_ms = int((time.perf_counter() - t_stream_start) * 1000)
+                    yield f"data: [TTFT]{ttft_ms}\n\n"
+                    first_token_sent = True
+                    logger.info(f"TTFT: {ttft_ms}ms | thinking_mode={is_thinking_mode}")
+
                 safe_token = token.replace("\n", "\\n")
                 yield f"data: {safe_token}\n\n"
 
