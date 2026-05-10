@@ -10,6 +10,7 @@ Legal_Documents/
 *.csv
 *.md
 !README.md
+!evaluation.md
 !AI_CONTEXT.md
 uploads/
 vector_store/
