@@ -3,350 +3,350 @@
     "case": 1,
     "scenario": "Force Majeure — COVID-19 Supply Chain",
     "query": "Does COVID-19 qualify as force majeure under a supply contract clause listing natural disasters and governmental action?",
-    "answer": "",
+    "answer": "- **Yes, COVID‑19 can qualify as a force‑majeure event** when the contract’s clause enumerates “natural disasters” and/or “governmental action.”  \n  - In *JN Contemporary Art v. Phillips Auctioneers LLC* (2020), the Southern District of New York held that the COVID‑19 pandemic satisfied the definition of a “natural disaster” under the contract’s specific force‑majeure language【Doc: 01_Force_Majeure_Supply_Contract.md, Page: 1】.  \n  - Standard drafting guidance recommends expressly listing “pandemics, epidemics, and governmental lockdowns” to capture such events, indicating that courts view these as covered when the clause includes natural disasters or government orders【Doc: 01_Force_Majeure_Supply_Contract.md, Page: 1】.  \n\n- **Key clause elements that support coverage**  \n  1. **Enumerated Events** – includes “natural disasters” and “government orders”【Doc: 01_Force_Majeure_Supply_Contract.md, Page: 1】.  \n  2. **Mitigation and notice** requirements must be met, but the qualification of the event itself is satisfied by the case precedent above.  \n\n**Conclusion:** Under a supply contract clause that lists natural disasters and governmental action, COVID‑19 is likely to be treated as a force‑majeure event, as affirmed by case law.",
     "citations": [
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 7,
-        "excerpt": "Legal Assistants Powered by Agentic RAG  |  Student Project Guide \nGen AI Capstone Project \n \n \nConfidential — For Educational Use Only \n7 \n2026 \nGod, and governmental action' but does \nnot mention pandemics. \nLegal Issues \n1) Does COVID-19 qualify as force \nmajeure under this clause? 2) Does the \nd"
-      },
-      {
-        "document_name": "test_legal.txt",
+        "document_name": "01_Force_Majeure_Supply_Contract.md",
         "page_number": 1,
-        "excerpt": "This is a legal document. The party of the first part agrees to the terms. Force majeure clauses apply to natural disasters and government actions."
+        "excerpt": "# Force Majeure Clause Analysis — Supply Contracts\n\n## 1. Statutory & Common Law Framework\nForce majeure in commercial contracts is generally governed by common law principles of impossibility and commercial impracticability (UCC § 2-615). However, courts strictly construe force majeure clauses base"
       },
       {
         "document_name": "01_Force_Majeure_Supply_Contract.md",
         "page_number": 1,
-        "excerpt": "**14.2 Epidemics and Pandemics.** For the avoidance of doubt, and notwithstanding any prior court rulings to the contrary, the outbreak of any epidemic or pandemic disease, including specifically COVID-19 (SARS-CoV-2) and any mutations or variants thereof, shall be deemed a Force Majeure Event if su"
+        "excerpt": "## 3. Standard Clause Components\nA comprehensive force majeure clause must include:\n1. **Enumerated Events**: \"Acts of God, natural disasters, epidemics, pandemics, government orders, acts of war, terrorism, or labor strikes.\"\n2. **Standard of Impact**: The event must render performance \"impossible\""
       },
       {
         "document_name": "01_Force_Majeure_Supply_Contract.md",
         "page_number": 1,
-        "excerpt": "# COMMERCIAL SUPPLY AGREEMENT\n\n## SECTION 14. FORCE MAJEURE\n\n**14.1 Definition.** A \"Force Majeure Event\" means any event beyond the reasonable control of the affected Party, including but not limited to: acts of God, natural disasters (including earthquakes, hurricanes, and floods), wars, insurrect"
+        "excerpt": "## 4. Practice Notes for Drafting\nWhen drafting for supply chains post-2020, expressly include \"pandemics, epidemics, and governmental lockdowns.\" Ensure the clause clearly states that payment obligations are *not* excused by force majeure events unless the banking system itself fails."
       },
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 6,
-        "excerpt": "is better for your specific use case \n• \nCheck 'hard prompts' leaderboard — legal questions are typically hard, multi-step prompts \n \n \n5. Legal Case Examples & Test Scenarios \nUse these 10 realistic case scenarios to build and test your RAG pipeline. Each provides the facts, \nlegal issues, and the"
+        "document_name": "05_Liquidated_Damages_Contract.md",
+        "page_number": 1,
+        "excerpt": "If the amount is designed primarily to punish the breaching party or coerce performance, courts will strike it down as an **unenforceable penalty**.\n\n## 2. Multi-Jurisdictional Approaches\n### United Kingdom (*Cavendish Square* Reform)\nIn *Cavendish Square Holding BV v. Talal El Makdessi (2015)*, the"
+      },
+      {
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
+        "page_number": 1,
+        "excerpt": "## 4. Ex Parte Seizure\nA unique and powerful remedy under the DTSA is the provision for *ex parte* civil seizure. In extraordinary circumstances, a court may issue an order, without notice to the defendant, providing for the seizure of property necessary to prevent the propagation or dissemination o"
       }
     ],
-    "latency_s": 41.5,
-    "task_success": false
+    "latency_s": 44.58,
+    "task_success": true
   },
   {
     "case": 2,
     "scenario": "Non-Compete Clause — California",
     "query": "Is a non-compete clause enforceable under California Business and Professions Code Section 16600 for tech employees?",
-    "answer": "No. Under California Business and Professions Code §16600, any contract that restrains a person from engaging in a lawful profession, trade, or business is void, and the statute is read broadly (per *Edwards v. Arthur Andersen LLP*) to invalidate any non‑compete agreement in an employment context unless a statutory exception applies. Accordingly, non‑compete clauses are strictly unenforceable against tech employees (and other professionals) in California, even when the agreement was signed in another state or contains a choice‑of‑law provision, unless the agreement falls within a narrow statutory exception such as the sale of a business or dissolution of a partnership [Doc: 02_Non_Compete_California.md, Page: 1].",
+    "answer": "**Short Answer:**  \nNo. Under California Business and Professions Code § 16600, a non‑compete clause is void and therefore unenforceable for tech employees (or any other class of workers) in California.\n\n**Supporting Points**\n\n- **Statutory prohibition** – Cal. Bus. & Prof. Code § 16600 declares that “every contract by which anyone is restrained from engaging in a lawful profession, trade, or business… is… void.” [Doc: 02_Non_Compete_California.md, Page: 1]  \n- **2024 legislative amendment (SB 699)** – Extends the void‑ness of non‑competes to *all* contracts, regardless of where they were signed or where the employment was performed, and creates a private right of action for employees. [Doc: 02_Non_Compete_California.md, Page: 1]  \n- **Case law confirming the rule**  \n  - *Edwards v. Arthur Andersen LLP* (2008) – The California Supreme Court rejected the “narrow restraint” exception; non‑competes are invalid even when narrowly tailored. [Doc: 02_Non_Compete_California.md, Page: 1]  \n  - *AMN Healthcare v. Aya Healthcare* (2018) – Extended § 16600 to invalidate employee non‑solicitation clauses, reinforcing the broad prohibition. [Doc: 02_Non_Compete_California.md, Page: 1]  \n  - *Silguero v. Creteguard, Inc.* (2010) – Employers cannot fire or refuse to hire an employee for refusing to sign an illegal non‑compete. [Doc: 02_Non_Compete_California.md, Page: 1]  \n- **Employer best‑practice guidance** – California employers are advised to *remove* non‑compete and customer non‑solicitation clauses from standard employment agreements and rely on confidentiality/trade‑secret agreements instead. [Doc: 02_Non_Compete_California.md, Page: 1]\n\n**Conclusion**  \nBecause California law expressly voids any agreement that restrains a lawful profession and recent legislation (SB 699) makes this prohibition absolute, a non‑compete clause is **not enforceable** for tech employees (or any other employees) in California. [Doc: 02_Non_Compete_California.md, Page: 1]",
     "citations": [
       {
         "document_name": "02_Non_Compete_California.md",
         "page_number": 1,
-        "excerpt": "**Summary of Precedent for Tech Employees:**\nUnder Section 16600, non-compete clauses are strictly unenforceable against tech employees and other professionals in California, even if the agreement was signed in another state or contains a choice-of-law provision favoring another state, unless the ag"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 7,
-        "excerpt": "preventing work for any competitor in the \nSaaS industry. She resigned and joined \na competitor in Texas. The original \nemployer seeks an injunction. \nLegal Issues \n1) Is the non-compete enforceable under \nCalifornia law (Bus & Prof Code \n§16600)? 2) Does Texas choice-of-law \nprovision override Cali"
-      },
-      {
-        "document_name": "02_Non_Compete_California.md",
-        "page_number": 1,
-        "excerpt": "# CALIFORNIA BUSINESS AND PROFESSIONS CODE\n## DIVISION 7. GENERAL BUSINESS REGULATIONS\n### PART 2. PRESERVATION AND REGULATION OF COMPETITION\n### CHAPTER 1. CONTRACTS IN RESTRAINT OF TRADE [16600 - 16607]\n\n**Section 16600. Void Contracts**\n\n(a) Except as provided in this chapter, every contract by w"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 8,
-        "excerpt": "Legal Issues \n1) Does the employer's IP clause cover \ninventions developed on personal time \nwith personal resources? 2) Do California \nLabor Code §§2870-2872 carve-out \nprotections apply? 3) Is the IP clause \noverbroad and potentially unenforceable? \nQuery for RAG \n\"Employee IP assignment clause \ne"
+        "excerpt": "# Non-Compete Clauses in California — 2024 Updates\n\n## 1. Statutory Prohibition (Cal. Bus. & Prof. Code § 16600)\nUnder California Business and Professions Code Section 16600, \"every contract by which anyone is restrained from engaging in a lawful profession, trade, or business of any kind is to that"
       },
       {
         "document_name": "04_IP_Ownership_CA_Labor_Code.md",
         "page_number": 1,
-        "excerpt": "# CALIFORNIA LABOR CODE\n## DIVISION 3. EMPLOYMENT RELATIONS\n### CHAPTER 2. EMPLOYER AND EMPLOYEE\n### ARTICLE 3.5. INVENTIONS MADE BY AN EMPLOYEE [2870 - 2872]\n\n**Section 2870. Inventions on Own Time**"
+        "excerpt": "## 5. Practice Notes for Employers\nTo ensure maximum enforceability of IP assignment clauses in California, employers must include the verbatim text or a direct summary of Cal. Labor Code § 2870 in the PIIA (Proprietary Information and Inventions Agreement) and have the employee acknowledge it. Empl"
+      },
+      {
+        "document_name": "02_Non_Compete_California.md",
+        "page_number": 1,
+        "excerpt": "## 3. Case Law Enforcement Table\n| Case Name | Year | Holding |\n|-----------|------|---------|\n| *Edwards v. Arthur Andersen LLP* | 2008 | CA Supreme Court rejected the \"narrow restraint\" exception. Non-competes are invalid even if narrowly tailored. |\n| *AMN Healthcare v. Aya Healthcare* | 2018 | E"
+      },
+      {
+        "document_name": "04_IP_Ownership_CA_Labor_Code.md",
+        "page_number": 1,
+        "excerpt": "## 3. Notice Requirement (Cal. Labor Code § 2872)\nIf an employment agreement contains a provision requiring the employee to assign inventions, the employer must provide written notification to the employee that the agreement does not apply to an invention which qualifies fully under the provisions o"
+      },
+      {
+        "document_name": "04_IP_Ownership_CA_Labor_Code.md",
+        "page_number": 1,
+        "excerpt": "## 2. California Labor Code § 2870 Exemption\nCalifornia provides specific protections for employee inventions. An employment agreement cannot require an employee to assign an invention to the employer if the invention meets **all four** of the following criteria (the Four-Part Test):\n1. Developed en"
       }
     ],
-    "latency_s": 16.43,
+    "latency_s": 12.0,
     "task_success": true
   },
   {
     "case": 3,
     "scenario": "GDPR Data Breach Liability",
     "query": "What are GDPR Article 32 security obligations for cloud data processors and liability under data processing agreements?",
-    "answer": "**GDPR Article 32 security obligations for cloud data processors**\n\n- Cloud processors must implement “appropriate technical and organisational measures” that are proportionate to the risk, taking into account the state of the art, implementation costs, the nature, scope, context and purposes of the processing, and the likelihood and severity of impact on data subjects’ rights and freedoms【Doc: 03_GDPR_Data_Breach.md, Page: 1】.  \n- The measures must, at a minimum, include:  \n  1. **Pseudonymisation and encryption** of personal data【Doc: 03_GDPR_Data_Breach.md, Page: 1】.  \n  2. **Ensuring ongoing confidentiality, integrity, availability and resilience** of processing systems and services【Doc: 03_GDPR_Data_Breach.md, Page: 1】.  \n  3. **Ability to restore availability and access** to personal data promptly after a physical or technical incident【Doc: 03_GDPR_Data_Breach.md, Page: 1】.  \n\n**Liability under data processing agreements (DPAs)**  \n\n- Because cloud data processors are directly subject to Article 32, a standard DPA makes the processor liable if it fails to implement the required security measures and a breach occurs【Doc: 03_GDPR_Data_Breach.md, Page: 1】.  \n- In such cases, the processor can face **direct regulatory fines** and is **required to indemnify the data controller for damages** arising from the breach【Doc: 03_GDPR_Data_Breach.md, Page: 1】.  ",
+    "answer": "**GDPR Article 32 – Security Obligations for Cloud Data Processors**\n\n- **Implement appropriate technical and organisational measures** that are proportionate to the risk of the processing. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n- **Specific measures include**:  \n  - Pseudonymisation and encryption of personal data. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n  - Ongoing assurance of confidentiality, integrity, availability and resilience of processing systems. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n  - Ability to restore availability and access to data promptly after an incident. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n  - Regular testing, assessment and evaluation of the effectiveness of the security measures. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n\nThese obligations apply to any **processor**, including cloud‑service providers, because they are “controllers and processors” under Article 32.\n\n---\n\n**Liability of Cloud Processors under Data‑Processing Agreements (DPAs)**  \n\n- **Compensation liability (Article 82)** – A processor is liable to pay compensation for material or non‑material damage **only if** it has **failed to comply with obligations that are specifically directed to processors** or has acted **contrary to the controller’s lawful instructions**. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n- **Administrative fines (Article 83)** – Breaches of Article 32 (or Article 33) can trigger administrative fines of up to **€10 million**, or **2 % of the undertaking’s total worldwide annual turnover** of the preceding financial year, whichever is higher. [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n- **Right to compensation for data subjects (Article 82)** – Any data subject who suffers damage because of a GDPR infringement (including a security failure by the processor) may claim compensation from the processor (or controller). [Doc: 03_GDPR_Data_Breach.md, Page: 1]  \n\n**Summary**\n\n- Cloud processors must adopt robust, risk‑based technical and organisational safeguards as listed in Article 32.  \n- Their liability under a DPA is limited to failures to meet processor‑specific obligations or to follow the controller’s lawful instructions, and they may face substantial administrative fines and compensation claims for security breaches.  ",
     "citations": [
       {
         "document_name": "03_GDPR_Data_Breach.md",
         "page_number": 1,
-        "excerpt": "**Liability under Data Processing Agreements (DPAs):**\nCloud data processors are directly subject to Article 32 obligations. Under a standard DPA, if a processor fails to implement these security measures resulting in a data breach, the processor faces direct regulatory fines and is liable to indemn"
+        "excerpt": "## 4. Liability and Fines (Article 82 & 83)\n- **Article 82 (Right to compensation)**: Any person who has suffered material or non-material damage as a result of a GDPR infringement has the right to receive compensation from the controller or processor. Processors are only liable for damage if they h"
       },
       {
         "document_name": "03_GDPR_Data_Breach.md",
         "page_number": 1,
-        "excerpt": "# GENERAL DATA PROTECTION REGULATION (GDPR)\n## Article 32: Security of processing"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 7,
-        "excerpt": "agreement (DPA). The DPA states the \nvendor implements 'industry-standard \nsecurity measures' but does not specify \nencryption requirements. Customers are \nfiling a class action. \nLegal Issues \n1) Is the vendor a data processor or joint \ncontroller under GDPR? 2) Does \n'industry-standard security' s"
+        "excerpt": "# GDPR Data Breach Notification and Liability\n\n## 1. Data Breach Notification Framework (Article 33)\nUnder the General Data Protection Regulation (GDPR), Article 33 requires data controllers to notify the competent supervisory authority of a personal data breach \"without undue delay and, where feasi"
       },
       {
         "document_name": "03_GDPR_Data_Breach.md",
         "page_number": 1,
-        "excerpt": "1. Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate techn"
+        "excerpt": "## 3. Security of Processing (Article 32)\nControllers and processors must implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk. This includes:\n- Pseudonymization and encryption of personal data\n- Ensuring ongoing confidentiality, integrity"
       },
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 8,
-        "excerpt": "Legal Assistants Powered by Agentic RAG  |  Student Project Guide \nGen AI Capstone Project \n \n \nConfidential — For Educational Use Only \n8 \n2026 \nliability be limited by the DPA's liability \ncap? \nQuery for RAG \n\"GDPR Article 32 security obligations for \ncloud data processors and liability under \nda"
+        "document_name": "03_GDPR_Data_Breach.md",
+        "page_number": 1,
+        "excerpt": "## 5. Landmark Enforcement Examples\n1. **Meta Platforms Ireland (2023)**: Fined €1.2 billion for transferring EU user data to the US without adequate safeguards.\n2. **Amazon Europe (2021)**: Fined €746 million for non-compliant targeted advertising.\n3. **British Airways (2020)**: Fined £20 million ("
+      },
+      {
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
+        "page_number": 1,
+        "excerpt": "*Independent derivation* (e.g., reverse engineering without breaching a contract) is a valid defense and does not constitute misappropriation.\n\n## 3. Customer Lists as Trade Secrets\nA frequent area of litigation involves departing employees taking customer lists. A customer list qualifies as a trade"
       }
     ],
-    "latency_s": 4.0,
+    "latency_s": 15.07,
     "task_success": true
   },
   {
     "case": 4,
     "scenario": "IP Ownership — Personal Time",
     "query": "Is an employee IP assignment clause enforceable for inventions developed on personal time under California Labor Code 2870?",
-    "answer": "Under California Labor Code § 2870, an employment‑agreement provision that requires an employee to assign “all inventions” is **not enforceable** with respect to inventions that the employee creates **entirely on his or her own time** and **without using the employer’s equipment, supplies, facilities, or trade‑secret information**. The statute expressly limits the reach of such assignment clauses, allowing them to apply only to inventions that (1) at the time of conception or reduction‑to‑practice relate to the employer’s business or anticipated research and development, or (2) result from work the employee performed for the employer [Doc: 04_IP_Ownership_CA_Labor_Code.md, Page: 1].\n\nTherefore, an IP assignment clause will **generally not be enforceable** for inventions developed on personal time using personal resources, **unless** the invention falls within one of the two statutory exceptions identified above. [Doc: 04_IP_Ownership_CA_Labor_Code.md, Page: 1]",
+    "answer": "**Short Answer:**  \nAn IP‑assignment clause is **not enforceable** for inventions that were developed on the employee’s personal time **if the invention satisfies all four criteria of California Labor Code § 2870**.\n\n**Supporting Points**\n\n- **Four‑Part Test (Cal. Labor Code § 2870)** – An employer cannot require assignment of an invention that:  \n  1. Was developed entirely on the employee’s own time;  \n  2. Was created without using the employer’s equipment, supplies, facilities, or trade‑secret information;  \n  3. Does not relate to the employer’s business or anticipated R&D at the time of conception or reduction to practice; and  \n  4. Did not result from any work performed for the employer.  \n  *[Doc: 04_IP_Ownership_CA_Labor_Code.md, Page: 1]*\n\n- **Enforceability Consequence** – Because the invention meets the “developed entirely on the employee’s own time” criterion (and the other three), the assignment provision is **void** under § 2870.  \n\n- **Notice Requirement** – Employers must give written notice that the agreement does **not** apply to inventions that qualify under § 2870. Failure to provide this notice further undermines enforceability.  \n  *[Doc: 04_IP_Ownership_CA_Labor_Code.md, Page: 1]*\n\n- **Best‑Practice Guidance** – To maximize enforceability, employers should (a) include the verbatim text or a direct summary of § 2870 in the Proprietary Information and Inventions Agreement (PIIA) and (b) obtain the employee’s acknowledgment, as well as require a “Prior Inventions” list.  \n  *[Doc: 04_IP_Ownership_CA_Labor_Code.md, Page: 1]*\n\n**Conclusion:**  \nIf an invention is created on the employee’s personal time and satisfies the full four‑part test of Cal. Labor Code § 2870, any IP‑assignment clause attempting to claim that invention for the employer is **unenforceable**.",
     "citations": [
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 8,
-        "excerpt": "Legal Issues \n1) Does the employer's IP clause cover \ninventions developed on personal time \nwith personal resources? 2) Do California \nLabor Code §§2870-2872 carve-out \nprotections apply? 3) Is the IP clause \noverbroad and potentially unenforceable? \nQuery for RAG \n\"Employee IP assignment clause \ne"
+        "document_name": "04_IP_Ownership_CA_Labor_Code.md",
+        "page_number": 1,
+        "excerpt": "## 5. Practice Notes for Employers\nTo ensure maximum enforceability of IP assignment clauses in California, employers must include the verbatim text or a direct summary of Cal. Labor Code § 2870 in the PIIA (Proprietary Information and Inventions Agreement) and have the employee acknowledge it. Empl"
       },
       {
         "document_name": "04_IP_Ownership_CA_Labor_Code.md",
         "page_number": 1,
-        "excerpt": "# CALIFORNIA LABOR CODE\n## DIVISION 3. EMPLOYMENT RELATIONS\n### CHAPTER 2. EMPLOYER AND EMPLOYEE\n### ARTICLE 3.5. INVENTIONS MADE BY AN EMPLOYEE [2870 - 2872]\n\n**Section 2870. Inventions on Own Time**"
+        "excerpt": "## 3. Notice Requirement (Cal. Labor Code § 2872)\nIf an employment agreement contains a provision requiring the employee to assign inventions, the employer must provide written notification to the employee that the agreement does not apply to an invention which qualifies fully under the provisions o"
       },
       {
         "document_name": "04_IP_Ownership_CA_Labor_Code.md",
         "page_number": 1,
-        "excerpt": "**Section 2870. Inventions on Own Time**\n\n(a) Any provision in an employment agreement which provides that an employee shall assign, or offer to assign, any of his or her rights in an invention to his or her employer shall not apply to an invention that the employee developed entirely on his or her"
+        "excerpt": "## 2. California Labor Code § 2870 Exemption\nCalifornia provides specific protections for employee inventions. An employment agreement cannot require an employee to assign an invention to the employer if the invention meets **all four** of the following criteria (the Four-Part Test):\n1. Developed en"
       },
       {
         "document_name": "02_Non_Compete_California.md",
         "page_number": 1,
-        "excerpt": "**Summary of Precedent for Tech Employees:**\nUnder Section 16600, non-compete clauses are strictly unenforceable against tech employees and other professionals in California, even if the agreement was signed in another state or contains a choice-of-law provision favoring another state, unless the ag"
+        "excerpt": "## 3. Case Law Enforcement Table\n| Case Name | Year | Holding |\n|-----------|------|---------|\n| *Edwards v. Arthur Andersen LLP* | 2008 | CA Supreme Court rejected the \"narrow restraint\" exception. Non-competes are invalid even if narrowly tailored. |\n| *AMN Healthcare v. Aya Healthcare* | 2018 | E"
       },
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 8,
-        "excerpt": "Legal Assistants Powered by Agentic RAG  |  Student Project Guide \nGen AI Capstone Project \n \n \nConfidential — For Educational Use Only \n8 \n2026 \nliability be limited by the DPA's liability \ncap? \nQuery for RAG \n\"GDPR Article 32 security obligations for \ncloud data processors and liability under \nda"
+        "document_name": "02_Non_Compete_California.md",
+        "page_number": 1,
+        "excerpt": "# Non-Compete Clauses in California — 2024 Updates\n\n## 1. Statutory Prohibition (Cal. Bus. & Prof. Code § 16600)\nUnder California Business and Professions Code Section 16600, \"every contract by which anyone is restrained from engaging in a lawful profession, trade, or business of any kind is to that"
       }
     ],
-    "latency_s": 14.42,
+    "latency_s": 4.93,
     "task_success": true
   },
   {
     "case": 5,
     "scenario": "Liquidated Damages vs Penalty",
     "query": "What is the enforceability test for a liquidated damages clause — genuine pre-estimate of loss versus unenforceable penalty?",
-    "answer": "The enforceability of a liquidated‑damages clause is determined by a two‑part test:\n\n1. **Genuine pre‑estimate of loss** – The clause must reflect a good‑faith, reasonable forecast of the actual loss that would result from a breach at the time the contract is formed. The loss must be difficult or impossible to calculate precisely when the parties contract. [Doc: 05_Liquidated_Damages_Contract.md, Page: 1]\n\n2. **Penalty analysis** – If the stipulated amount is extravagant, unconscionable, or vastly disproportionate to the greatest loss that could reasonably be expected, the clause is treated as a penalty. A penalty is unenforceable because its primary purpose is to punish or coerce the breaching party rather than to compensate the injured party. [Doc: 05_Liquidated_Damages_Contract.md, Page: 1]",
+    "answer": "**Enforceability Test for a Liquidated Damages Clause (U.S. Common Law & UCC § 2‑718)**  \n\n| Requirement | Description | Source |\n|-------------|-------------|--------|\n| **1. Uncertainty (Difficulty of Estimating Actual Damages)** | At the time the contract is formed, the parties must show that the actual damages that would result from a breach were **hard or impossible to calculate with certainty**. | [Doc: 05_Liquidated_Damages_Contract.md, Page: 1] |\n| **2. Reasonableness (Genuine Pre‑estimate of Loss)** | The stipulated amount must be a **reasonable forecast of the compensation** the non‑breaching party would suffer – i.e., a *genuine pre‑estimate of loss*. | [Doc: 05_Liquidated_Damages_Contract.md, Page: 1] |\n| **Penalty Rule** | If the amount is primarily intended **to punish** the breaching party or to **coerce performance**, rather than to compensate, the clause is treated as an **unenforceable penalty** and will be struck down. | [Doc: 05_Liquidated_Damages_Contract.md, Page: 1] |\n\n**Summary**\n\n- A liquidated damages clause is enforceable when it satisfies both **uncertainty** and **reasonableness** (the “genuine pre‑estimate of loss” test).  \n- If the clause functions as a **penalty**—designed to punish or force compliance—it is **unenforceable**.  \n\n*All statements are drawn directly from the provided excerpts.*",
     "citations": [
       {
         "document_name": "05_Liquidated_Damages_Contract.md",
         "page_number": 1,
-        "excerpt": "# COMMERCIAL CONTRACT LAW: LIQUIDATED DAMAGES\n\n## The Enforceability Test\n\nIn both commercial and construction contracts, the enforceability of a liquidated damages clause depends on whether it is classified as a valid compensatory mechanism or an unenforceable penalty.\n\n**Genuine Pre-Estimate of Lo"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 8,
-        "excerpt": "days late on 8,000 packages, resulting in \na $2,000,000 damages claim. \nLegal Issues \n1) Is the $50/package/day clause a \ngenuine pre-estimate of loss (liquidated \ndamages) or an unenforceable penalty? 2) \nWhat was the actual loss to the platform? \n3) How do English courts (Cavendish \nSquare) vs US"
+        "excerpt": "# Liquidated Damages vs. Unenforceable Penalties\n\n## 1. Legal Standard for Liquidated Damages\nA liquidated damages clause specifies a predetermined amount of money that must be paid as damages for failure to perform under a contract. To be enforceable under US common law and the Uniform Commercial C"
       },
       {
         "document_name": "05_Liquidated_Damages_Contract.md",
         "page_number": 1,
-        "excerpt": "**Unenforceable Penalty:**\nIf the stipulated sum is extravagant, unconscionable, or vastly disproportionate to the greatest possible loss that could foreseeably follow from the breach, the court will strike it down as a penalty. A clause is considered a penalty if its primary purpose is to punish th"
+        "excerpt": "If the amount is designed primarily to punish the breaching party or coerce performance, courts will strike it down as an **unenforceable penalty**.\n\n## 2. Multi-Jurisdictional Approaches\n### United Kingdom (*Cavendish Square* Reform)\nIn *Cavendish Square Holding BV v. Talal El Makdessi (2015)*, the"
+      },
+      {
+        "document_name": "05_Liquidated_Damages_Contract.md",
+        "page_number": 1,
+        "excerpt": "## 3. Construction Contract Standards\nLiquidated damages are extremely common in construction contracts for delays in substantial completion. The amount is typically calculated based on:\n- Extended project management costs\n- Loss of use / lost rental income\n- Additional financing costs\n\n## 4. Drafti"
       },
       {
         "document_name": "10_Arbitration_Consumer_Agreement.md",
         "page_number": 1,
-        "excerpt": "**15.3 Unconscionability and Enforceability:**\nIn accordance with precedent such as *AT&T Mobility LLC v. Concepcion* and related state unconscionability doctrines, a mandatory arbitration clause with a class action waiver may be deemed substantively unconscionable if the individual recovery sought"
+        "excerpt": "## 3. Defenses to Enforcement: Unconscionability\nWhile the FAA strongly protects arbitration agreements, they can still be invalidated under general state contract law principles, most notably **unconscionability**, which requires two prongs:\n1. **Procedural Unconscionability**: Relates to the makin"
       },
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 10,
-        "excerpt": "cover this data? 3) What remedies are \navailable — injunction, damages, \nattorney's fees? \nQuery for RAG \n\"Trade secret misappropriation customer \nlist Defend Trade Secrets Act injunctive \nrelief departing employee\" \n \n⚖ Case 10 — Arbitration Clause \nUnconscionability \nCase Facts \nA consumer signed"
+        "document_name": "01_Force_Majeure_Supply_Contract.md",
+        "page_number": 1,
+        "excerpt": "## 3. Standard Clause Components\nA comprehensive force majeure clause must include:\n1. **Enumerated Events**: \"Acts of God, natural disasters, epidemics, pandemics, government orders, acts of war, terrorism, or labor strikes.\"\n2. **Standard of Impact**: The event must render performance \"impossible\""
       }
     ],
-    "latency_s": 10.11,
+    "latency_s": 74.64,
     "task_success": true
   },
   {
     "case": 6,
     "scenario": "SaaS Auto-Renewal Clause",
     "query": "Is an auto-renewal clause enforceable in SaaS enterprise contracts if it requires conspicuous notice under electronic signature?",
-    "answer": "Yes. Under California law an auto‑renewal provision in a SaaS enterprise agreement is enforceable only when the renewal terms are presented to the subscriber in a “clear and conspicuous” way **before** the subscription is fulfilled and, when the contract is executed with an electronic signature, the platform must also give the subscriber a simple, online mechanism to cancel the renewal at any time. If either the conspicuous notice or the easy‑online cancellation method is missing, the auto‑renewal clause is deemed unenforceable【Doc: 06_SaaS_Auto_Renewal_TOS.md, Page: 1】.",
+    "answer": "**Enforceability of an auto‑renewal clause in SaaS enterprise (B2B) contracts that relies on conspicuous notice via electronic signature**\n\n- **California Automatic Renewal Law (ARL) requirements**  \n  - The clause must be presented in a *“clear and conspicuous”* manner.  \n  - The consumer (or business customer) must give *affirmative consent* to the agreement containing the auto‑renewal terms.  \n  - An acknowledgment that includes the renewal terms, cancellation policy, and cancellation instructions must be provided in a form the recipient can retain.  \n  - If the contract was signed electronically, the notice must be delivered in a way that satisfies the “clear and conspicuous” standard and allows the signatory to retain it.  \n  - *Citation:* [Doc: 06_SaaS_Auto_Renewal_TOS.md, Page: 1]  \n\n- **Notice timing for longer terms**  \n  - For initial terms of **one year or longer**, the business must give the customer **15‑45 days** notice before the renewal date.  \n  - This timing requirement applies regardless of whether the contract is B2B or B2C.  \n  - *Citation:* [Doc: 06_SaaS_Auto_Renewal_TOS.md, Page: 1]  \n\n- **B2B (enterprise) specific enforcement**  \n  - Although ARLs are primarily aimed at B2C contracts, courts *occasionally* apply similar unconscionability standards to B2B agreements involving small businesses.  \n  - **Enterprise‑level B2B contracts** are *generally enforced* as drafted, provided there is **no fraud** and the statutory notice/consent requirements are satisfied.  \n  - Drafting a “Non‑Renewal Notice” window (e.g., 30 days before term end) is a best‑practice to further protect enforceability.  \n  - *Citation:* [Doc: 06_SaaS_Auto_Renewal_TOS.md, Page: 1]  \n\n- **Conclusion**  \n  - An auto‑renewal clause that **requires conspicuous notice and obtains affirmative electronic consent** meets the core ARL criteria.  \n  - When combined with the statutory **15‑45‑day pre‑renewal notice** (for terms ≥1 year) and no fraudulent conduct, the clause is **enforceable in SaaS enterprise (B2B) contracts** under California law.  \n\n**Key take‑aways for enforceability**\n\n| Requirement | Must be satisfied for enforceability |\n|-------------|--------------------------------------|\n| Clear & conspicuous presentation of renewal terms | ✔︎ |\n| Affirmative electronic consent (e‑signature) | ✔︎ |\n| Retainable acknowledgment (including cancellation info) | ✔︎ |\n| Pre‑renewal notice (15‑45 days for ≥1‑year terms)",
     "citations": [
       {
         "document_name": "06_SaaS_Auto_Renewal_TOS.md",
         "page_number": 1,
-        "excerpt": "**8.3 Enforceability and Conspicuous Notice.**\nFor an auto-renewal clause to be enforceable in a SaaS enterprise contract, particularly under California law, the auto-renewal terms must be presented in a \"clear and conspicuous\" manner before the subscription is fulfilled. Furthermore, if the agreeme"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 9,
-        "excerpt": "Legal Assistants Powered by Agentic RAG  |  Student Project Guide \nGen AI Capstone Project \n \n \nConfidential — For Educational Use Only \n9 \n2026 \n \n⚖ Case 6 — SaaS Subscription Auto-Renewal \nDispute \nCase Facts \nA startup was automatically charged \n$120,000 for a third year of a SaaS \nenterprise sub"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 9,
-        "excerpt": "laws require conspicuous notice of auto-\nrenewal? \nQuery for RAG \n\"Auto-renewal clause enforceability \nconspicuous notice requirement SaaS \nenterprise contracts electronic signature\" \n \n⚖ Case 7 — Wrongful Termination and At-Will \nEmployment \nCase Facts \nAn employee was terminated after raising \nsaf"
+        "excerpt": "# SaaS Auto-Renewal and Automatic Renewal Laws (ARLs)\n\n## 1. Compliance Requirements (California ARL)\nCalifornia's Automatic Renewal Law (Bus. & Prof. Code §§ 17600–17606) is the strictest in the nation. It requires businesses offering subscription models to consumers to:\n1. Present the automatic re"
       },
       {
         "document_name": "06_SaaS_Auto_Renewal_TOS.md",
         "page_number": 1,
-        "excerpt": "# SAAS B2B TERMS OF SERVICE\n## SECTION 8. TERM AND AUTO-RENEWAL\n\n**8.1 Initial Term.** The initial term of this Agreement shall commence on the Effective Date and continue for a period of one (1) year.\n\n**8.2 Automatic Renewal.** \nIn accordance with California's Automatic Renewal Law (ARL) (Bus. & P"
+        "excerpt": "## 4. Best Practices for B2B vs B2C\nWhile ARLs primarily target B2C (consumer) contracts, courts occasionally apply similar unconscionability standards to B2B contracts involving small businesses. Enterprise B2B contracts generally enforce auto-renewal clauses strictly as drafted, provided there is"
       },
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 7,
-        "excerpt": "preventing work for any competitor in the \nSaaS industry. She resigned and joined \na competitor in Texas. The original \nemployer seeks an injunction. \nLegal Issues \n1) Is the non-compete enforceable under \nCalifornia law (Bus & Prof Code \n§16600)? 2) Does Texas choice-of-law \nprovision override Cali"
+        "document_name": "06_SaaS_Auto_Renewal_TOS.md",
+        "page_number": 1,
+        "excerpt": "## 2. Recent Amendments (Effective 2022)\n- Notice requirements for initial terms of one year or longer: Businesses must provide notice 15 to 45 days before the renewal date.\n- Notice for free trials: If a free trial lasts more than 31 days, notice must be provided between 3 and 21 days before the ex"
+      },
+      {
+        "document_name": "04_IP_Ownership_CA_Labor_Code.md",
+        "page_number": 1,
+        "excerpt": "## 3. Notice Requirement (Cal. Labor Code § 2872)\nIf an employment agreement contains a provision requiring the employee to assign inventions, the employer must provide written notification to the employee that the agreement does not apply to an invention which qualifies fully under the provisions o"
+      },
+      {
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
+        "page_number": 1,
+        "excerpt": "*Independent derivation* (e.g., reverse engineering without breaching a contract) is a valid defense and does not constitute misappropriation.\n\n## 3. Customer Lists as Trade Secrets\nA frequent area of litigation involves departing employees taking customer lists. A customer list qualifies as a trade"
       }
     ],
-    "latency_s": 12.97,
+    "latency_s": 36.48,
     "task_success": true
   },
   {
     "case": 7,
     "scenario": "Whistleblower Retaliation",
     "query": "Does Sarbanes-Oxley whistleblower protection apply to employees of private companies terminated after raising safety concerns?",
-    "answer": "No.  The Sarbanes‑Oxley Act’s whistle‑blower protection (Section 806) is limited to employees, officers, contractors, subcontractors or agents of **publicly‑traded companies** (or entities that must file reports under the Securities Exchange Act) and to conduct that “reasonably believes constitutes a violation of federal law relating to fraud against shareholders”【Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1】.  \n\nFor **private‑company employees**, the Supreme Court in *Lawson v. FMR LLC* held that the SOX shield extends only when the private employee is a **contractor or subcontractor to a public company** **and** the disclosed concern involves **fraud against shareholders or SEC rule violations**【Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1】.  Raising a general workplace‑safety issue that does not implicate shareholder fraud therefore **does not qualify for SOX protection**【Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1】.  \n\nAccordingly, an employee of a private company who is terminated for merely reporting safety concerns is **not covered** by Sarbanes‑Oxley whistle‑blower retaliation protections, unless the safety concern can be tied directly to shareholder fraud or the employee is a contractor/subcontractor to a public company and the concern meets the fraud‑related test.",
+    "answer": "**Short answer:**  \nSarbanes‑Oxley (SOX) whistle‑blower protection does **not automatically apply** to employees of a purely private company who are terminated after raising safety concerns. Protection is available only when **both** of the following conditions are met:\n\n1. **The employee is covered by SOX** – i.e., the employee works for a publicly‑traded company **or** for a private contractor/sub‑contractor that provides services to a publicly‑traded company (Lawson v. FMR LLC).  \n2. **The reported conduct falls within the “enumerated laws”** protected by SOX (mail, wire, bank, or securities fraud; SEC rule violations; or federal fraud‑against‑shareholders statutes). Safety‑concern reporting that does not allege one of those violations is not a protected activity.\n\n---\n\n### Detailed analysis\n\n| Issue | Relevant provision | Application to the facts |\n|-------|-------------------|--------------------------|\n| **Who is protected under SOX?** | “SOX protects employees of publicly traded companies….” [Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1] | A private‑company employee is **not** automatically covered. |\n| **Extension to private contractors/sub‑contractors** | *Lawson v. FMR LLC* held that “SOX whistleblower protections extend to employees of private contractors and subcontractors serving public companies.” [Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1] | If the private employee works **as a contractor/sub‑contractor** for a public company, protection may apply. |\n| **Scope of protected activity** | “To be protected, the employee must reasonably believe that the conduct they are reporting constitutes a violation of the enumerated laws… (mail, wire, bank, securities fraud; SEC violations; federal fraud‑against‑shareholders statutes).” [Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1] | Raising a **general safety concern** does **not** fall within those enumerated violations unless the safety issue is tied to a fraud‑related violation covered by SOX. |\n| **Burden of proof** (relevant if a claim is made) | Employee must show protected activity was a “contributing factor” to the adverse action; employer can escape liability only by clear‑and‑convincing proof it would have acted the same absent the protected activity. [Doc: 07_Whistleblower_Retaliation_SOX.md, Page: 1] | Even if the employee could meet the first two conditions, they would still bear the evidentiary burden. |\n\n---\n\n### Conclusion\n\n- **If the employee works for a private company that is *not* a contractor/sub‑contractor to a public company**, SOX **does not** protect them.  \n- **If the employee is a contractor/sub‑contractor to a public company**, SOX **may** protect them, **but only** if the safety concern is framed as a violation of the specific fraud‑related statutes enumerated in SOX. General safety complaints unrelated to those statutes are **outside** the scope of SOX protection.  \n\nTherefore, **Sarbanes‑Oxley whistle‑blower protection generally does not apply** to private‑company employees terminated after raising safety concerns, unless the narrow conditions above are satisfied.",
     "citations": [
       {
         "document_name": "07_Whistleblower_Retaliation_SOX.md",
         "page_number": 1,
-        "excerpt": "**Application to Private Companies:**\nIn *Lawson v. FMR LLC* (2014), the United States Supreme Court held that the whistleblower protections of SOX Section 806 also apply to employees of private companies that are contractors or subcontractors to public companies. However, for a private company empl"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 9,
-        "excerpt": "whistleblower protections apply to this \nprivate company? 4) Is the at-will \nemployment doctrine overcome? \nQuery for RAG \n\"Whistleblower retaliation wrongful \ntermination at-will employment \nexceptions Sarbanes-Oxley private \ncompany\" \n \n⚖ Case 8 — Construction Contract Disputes: \nScope Creep"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 9,
-        "excerpt": "laws require conspicuous notice of auto-\nrenewal? \nQuery for RAG \n\"Auto-renewal clause enforceability \nconspicuous notice requirement SaaS \nenterprise contracts electronic signature\" \n \n⚖ Case 7 — Wrongful Termination and At-Will \nEmployment \nCase Facts \nAn employee was terminated after raising \nsaf"
+        "excerpt": "# Whistleblower Retaliation under Sarbanes-Oxley (SOX)\n\n## 1. SOX Section 806 (18 U.S.C. § 1514A)\nThe Sarbanes-Oxley Act of 2002 (SOX) protects employees of publicly traded companies from retaliation for reporting alleged mail, wire, bank, or securities fraud; violations of SEC rules and regulations"
       },
       {
         "document_name": "07_Whistleblower_Retaliation_SOX.md",
         "page_number": 1,
-        "excerpt": "**(a) Whistleblower Protection for Employees of Publicly Traded Companies.** \nNo company with a class of securities registered under section 12 of the Securities Exchange Act of 1934, or that is required to file reports under section 15(d) of the same Act, or any officer, employee, contractor, subco"
+        "excerpt": "## 3. Scope of Protected Activity\nTo be protected, the employee must reasonably believe that the conduct they are reporting constitutes a violation of the enumerated laws. The reporting can be internal (to a supervisor or compliance department) or external (to the SEC, Congress, or a federal agency)"
       },
       {
-        "document_name": "07_Whistleblower_Retaliation_SOX.md",
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
         "page_number": 1,
-        "excerpt": "# SARBANES-OXLEY ACT OF 2002 (SOX)\n## TITLE VIII—CORPORATE AND CRIMINAL FRAUD ACCOUNTABILITY\n### SECTION 806: Protection for Employees of Publicly Traded Companies Who Provide Evidence of Fraud"
+        "excerpt": "## 4. Ex Parte Seizure\nA unique and powerful remedy under the DTSA is the provision for *ex parte* civil seizure. In extraordinary circumstances, a court may issue an order, without notice to the defendant, providing for the seizure of property necessary to prevent the propagation or dissemination o"
+      },
+      {
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
+        "page_number": 1,
+        "excerpt": "*Independent derivation* (e.g., reverse engineering without breaching a contract) is a valid defense and does not constitute misappropriation.\n\n## 3. Customer Lists as Trade Secrets\nA frequent area of litigation involves departing employees taking customer lists. A customer list qualifies as a trade"
+      },
+      {
+        "document_name": "02_Non_Compete_California.md",
+        "page_number": 1,
+        "excerpt": "## 3. Case Law Enforcement Table\n| Case Name | Year | Holding |\n|-----------|------|---------|\n| *Edwards v. Arthur Andersen LLP* | 2008 | CA Supreme Court rejected the \"narrow restraint\" exception. Non-competes are invalid even if narrowly tailored. |\n| *AMN Healthcare v. Aya Healthcare* | 2018 | E"
       }
     ],
-    "latency_s": 15.4,
+    "latency_s": 18.31,
     "task_success": true
   },
   {
     "case": 8,
     "scenario": "Construction Scope Creep",
     "query": "What constitutes a valid change order under AIA construction contracts and can verbal instructions from an owner be binding?",
-    "answer": "A valid Change Order under the AIA A201 contract must be **a written instrument prepared by the Architect and signed by the Owner, Contractor, and Architect** that sets out (1) the specific change in the work, (2) any adjustment to the Contract Sum, and (3) any adjustment to the Contract Time【Doc: 08_Construction_AIA_Change_Order.md, Page: 1】.  \n\nBecause the Change Order must be in writing and signed by all parties, **verbal instructions from the Owner (or Architect) are not binding and do not create a valid Change Order**; any extra work based solely on a verbal directive is performed at the Contractor’s own risk【Doc: 08_Construction_AIA_Change_Order.md, Page: 1】.",
+    "answer": "**Valid Change Order under AIA A201**\n\n- **Written agreement of all three parties** – A change order must be executed by the **Owner, Contractor, and Architect**. [Doc: 08_Construction_AIA_Change_Order.md, Page: 1]  \n- **Formal process** – The change‑order workflow (identification, RFP/COR, pricing, architect review, execution) must be followed, culminating in the signed change order by the three parties. [Doc: 08_Construction_AIA_Change_Order.md, Page: 1]  \n- **Alternative mechanisms** – If the parties cannot agree on price or schedule, the contract permits a **Construction Change Directive (CCD)**, which is authorized only by the Owner and Architect and later priced on a time‑and‑materials basis. [Doc: 08_Construction_AIA_Change_Order.md, Page: 1]  \n\n**Verbal Instructions from the Owner**\n\n- **AIA A201 requirement** – The AIA document **strictly requires written authorization** for any change; verbal instructions do **not** constitute a valid change order. [Doc: 08_Construction_AIA_Change_Order.md, Page: 1]  \n- **Potential judicial doctrines** – Courts may, in limited circumstances, enforce verbal orders under **waiver** or **unjust enrichment** theories when the Owner:\n  1. Gives a verbal order,  \n  2. Allows the work to proceed without objection, and  \n  3. Later refuses payment because the order was not written. [Doc: 08_Construction_AIA_Change_Order.md, Page: 1]  \n\n**Summary**\n\n- A valid change order under AIA A201 is a **written, signed agreement** among Owner, Contractor, and Architect, following the prescribed change‑order process.  \n- **Verbal instructions are not binding** under the contract’s terms, though they may be enforced by a court under equitable doctrines if the Owner’s conduct effectively waives the written‑only requirement.",
     "citations": [
       {
         "document_name": "08_Construction_AIA_Change_Order.md",
         "page_number": 1,
-        "excerpt": "**7.3 Verbal Instructions and Scope Creep.**\nUnder standard AIA construction contracts, verbal instructions from an owner or architect are **not** binding and do not constitute a valid Change Order. To prevent scope creep and ensure enforceability, any modification to the Contract Sum or Contract Ti"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 10,
-        "excerpt": "Legal Assistants Powered by Agentic RAG  |  Student Project Guide \nGen AI Capstone Project \n \n \nConfidential — For Educational Use Only \n10 \n2026 \nCase Facts \nA general contractor signed a fixed-price \nconstruction contract for $5M to build a \ncommercial office. During construction, \nthe owner reque"
+        "excerpt": "# Construction Change Orders (AIA A201)\n\n## 1. AIA Document A201 General Conditions (Article 7)\nUnder the standard AIA Document A201 (General Conditions of the Contract for Construction), changes in the work must be accomplished by one of three methods:\n1. **Change Order (CO)**: Requires agreement b"
       },
       {
         "document_name": "08_Construction_AIA_Change_Order.md",
         "page_number": 1,
-        "excerpt": "# AIA DOCUMENT A201 - GENERAL CONDITIONS OF THE CONTRACT FOR CONSTRUCTION\n## ARTICLE 7: CHANGES IN THE WORK\n\n**7.1 General.** Changes in the Work may be accomplished after execution of the Contract, and without invalidating the Contract, by Change Order, Construction Change Directive, or order for a"
+        "excerpt": "## 4. The Change Order Process Table\n\n| Step | Action | Responsibility |\n|------|--------|----------------|\n| 1 | Identification of changed condition or Owner request | Contractor / Owner |\n| 2 | Issuance of Request for Proposal (RFP) or Change Order Request (COR) | Architect / Contractor |\n| 3 | Su"
       },
       {
-        "document_name": "06_SaaS_Auto_Renewal_TOS.md",
+        "document_name": "08_Construction_AIA_Change_Order.md",
         "page_number": 1,
-        "excerpt": "**8.3 Enforceability and Conspicuous Notice.**\nFor an auto-renewal clause to be enforceable in a SaaS enterprise contract, particularly under California law, the auto-renewal terms must be presented in a \"clear and conspicuous\" manner before the subscription is fulfilled. Furthermore, if the agreeme"
+        "excerpt": "## 2. Construction Change Directives (CCDs)\nA CCD is a critical tool to prevent project delays when the parties cannot agree on the price or time impact of a change. The Owner can mandate the work proceed, and the Contractor must comply. The cost is calculated later using a \"time and materials\" basi"
       },
       {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 10,
-        "excerpt": "work? 4) What is the standard for scope \ninterpretation? \nQuery for RAG \n\"Construction contract change order \nvalidity verbal instructions scope of work \ndispute unjust enrichment\" \n \n⚖ Case 9 — Confidentiality Breach and Trade \nSecrets \nCase Facts \nA departing VP of Sales emailed himself \na list of"
+        "document_name": "05_Liquidated_Damages_Contract.md",
+        "page_number": 1,
+        "excerpt": "## 3. Construction Contract Standards\nLiquidated damages are extremely common in construction contracts for delays in substantial completion. The amount is typically calculated based on:\n- Extended project management costs\n- Loss of use / lost rental income\n- Additional financing costs\n\n## 4. Drafti"
+      },
+      {
+        "document_name": "04_IP_Ownership_CA_Labor_Code.md",
+        "page_number": 1,
+        "excerpt": "## 5. Practice Notes for Employers\nTo ensure maximum enforceability of IP assignment clauses in California, employers must include the verbatim text or a direct summary of Cal. Labor Code § 2870 in the PIIA (Proprietary Information and Inventions Agreement) and have the employee acknowledge it. Empl"
       }
     ],
-    "latency_s": 18.48,
+    "latency_s": 14.87,
     "task_success": true
   },
   {
     "case": 9,
     "scenario": "Trade Secret Misappropriation",
     "query": "Does a customer list qualify as a trade secret under the Defend Trade Secrets Act when taken by a departing employee?",
-    "answer": "Yes. A customer list can be a protected trade secret under the Defend Trade Secrets Act when a departing employee takes it, **provided** (1) the list derives independent economic value because it is not generally known to competitors, and (2) the employer has taken reasonable, affirmative steps to keep the list secret—such as requiring NDAs, using password protection, and limiting access to a need‑to‑know basis. If the customer identities are readily obtainable from public sources, the list would not be covered. [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]  \n\nThe DTSA (18 U.S.C. § 1836) authorizes civil actions to enjoin and recover damages for such misappropriation. [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]",
+    "answer": "**Short answer:**  \nA customer list can be a trade secret under the Defend Trade Secrets Act (DTSA) **if** it meets the statutory and practical requirements for trade‑secret protection; otherwise it is not protected.\n\n**Why the list may qualify**\n\n- **Statutory elements** – The DTSA defines a trade secret as information that (1) the owner has taken **reasonable measures** to keep secret and (2) has **independent economic value** because it is not generally known or readily ascertainable. [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]  \n- **Specific criteria for customer lists** – A list qualifies when it:\n  1. Contains **non‑public information** (e.g., pricing history, purchasing preferences, direct contacts of key decision‑makers). [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]  \n  2. Was developed with **significant time and money** by the employer. [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]  \n  3. Is protected by **reasonable safeguards** (e.g., password protection, limited access, NDA requirements). [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]\n\nIf a departing employee takes such a list that satisfies all three factors, the list meets both the DTSA’s statutory definition and the practical “customer‑list” test, making it a protectable trade secret.\n\n**When the list does **not** qualify**\n\n- A list that is **easily compiled from public sources** (e.g., LinkedIn, public directories) lacks the required non‑public character and is expressly stated **not** to be a trade secret. [Doc: 09_Defend_Trade_Secrets_Act.md, Page: 1]\n\n**Conclusion**\n\n- **Yes**, a customer list can be a DTSA trade secret **when** it contains non‑public, economically valuable information, was created with substantial investment, and is protected by reasonable security measures.  \n- **No**, a list that is publicly available or lacks the above safeguards does **not** qualify as a trade secret under the DTSA.",
     "citations": [
       {
         "document_name": "09_Defend_Trade_Secrets_Act.md",
         "page_number": 1,
-        "excerpt": "**Application to Customer Lists:**\nA customer list qualifies as a trade secret under the Defend Trade Secrets Act when taken by a departing employee if the list derives independent economic value from not being generally known to competitors and the employer has taken reasonable, affirmative measure"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 10,
-        "excerpt": "work? 4) What is the standard for scope \ninterpretation? \nQuery for RAG \n\"Construction contract change order \nvalidity verbal instructions scope of work \ndispute unjust enrichment\" \n \n⚖ Case 9 — Confidentiality Breach and Trade \nSecrets \nCase Facts \nA departing VP of Sales emailed himself \na list of"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 9,
-        "excerpt": "laws require conspicuous notice of auto-\nrenewal? \nQuery for RAG \n\"Auto-renewal clause enforceability \nconspicuous notice requirement SaaS \nenterprise contracts electronic signature\" \n \n⚖ Case 7 — Wrongful Termination and At-Will \nEmployment \nCase Facts \nAn employee was terminated after raising \nsaf"
-      },
-      {
-        "document_name": "07_Whistleblower_Retaliation_SOX.md",
-        "page_number": 1,
-        "excerpt": "**(a) Whistleblower Protection for Employees of Publicly Traded Companies.** \nNo company with a class of securities registered under section 12 of the Securities Exchange Act of 1934, or that is required to file reports under section 15(d) of the same Act, or any officer, employee, contractor, subco"
+        "excerpt": "*Independent derivation* (e.g., reverse engineering without breaching a contract) is a valid defense and does not constitute misappropriation.\n\n## 3. Customer Lists as Trade Secrets\nA frequent area of litigation involves departing employees taking customer lists. A customer list qualifies as a trade"
       },
       {
         "document_name": "09_Defend_Trade_Secrets_Act.md",
         "page_number": 1,
-        "excerpt": "# DEFEND TRADE SECRETS ACT OF 2016 (DTSA)\n## 18 U.S.C. § 1836 - Civil proceedings to enjoin and recover damages for misappropriation of trade secrets"
+        "excerpt": "## 4. Ex Parte Seizure\nA unique and powerful remedy under the DTSA is the provision for *ex parte* civil seizure. In extraordinary circumstances, a court may issue an order, without notice to the defendant, providing for the seizure of property necessary to prevent the propagation or dissemination o"
+      },
+      {
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
+        "page_number": 1,
+        "excerpt": "# Defend Trade Secrets Act (DTSA)\n\n## 1. Definition of a Trade Secret (18 U.S.C. § 1839)\nThe Defend Trade Secrets Act of 2016 (DTSA) federalized trade secret law in the United States. A trade secret includes all forms of financial, business, scientific, technical, economic, or engineering informatio"
+      },
+      {
+        "document_name": "09_Defend_Trade_Secrets_Act.md",
+        "page_number": 1,
+        "excerpt": "## 2. Misappropriation\nMisappropriation under the DTSA includes:\n- Acquisition of a trade secret by improper means (theft, bribery, misrepresentation, breach of a duty to maintain secrecy).\n- Disclosure or use of a trade secret without express or implied consent by a person who used improper means t"
+      },
+      {
+        "document_name": "02_Non_Compete_California.md",
+        "page_number": 1,
+        "excerpt": "## 3. Case Law Enforcement Table\n| Case Name | Year | Holding |\n|-----------|------|---------|\n| *Edwards v. Arthur Andersen LLP* | 2008 | CA Supreme Court rejected the \"narrow restraint\" exception. Non-competes are invalid even if narrowly tailored. |\n| *AMN Healthcare v. Aya Healthcare* | 2018 | E"
       }
     ],
-    "latency_s": 10.23,
+    "latency_s": 6.04,
     "task_success": true
   },
   {
     "case": 10,
     "scenario": "Arbitration Unconscionability",
     "query": "Is a mandatory arbitration clause with a class action waiver unconscionable when individual recovery is less than arbitration costs?",
-    "answer": "Yes. The documents state that a mandatory arbitration clause that also contains a class‑action waiver can be found **substantively unconscionable** when the amount a consumer could recover is so small that it is far below the administrative costs and fees required to start the arbitration. In that situation the clause functions as a de facto exculpatory provision that shields the company from liability [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1]. The same concern is highlighted as a key legal issue in the project guide, noting that “individual arbitration would cost more than any individual’s recovery” [Doc: Legal_AI_Assistant_Final_Project_ABS.pdf, Page: 11].",
+    "answer": "**Short answer:**  \nA mandatory arbitration clause that also contains a class‑action waiver is **not per se unconscionable** simply because the expected individual recovery may be lower than the cost of arbitration. Whether it is unconscionable depends on a two‑prong analysis—procedural and substantive—under state contract‑law principles, and the courts apply a “sliding‑scale” approach (greater substantive unfairness can compensate for weaker procedural unfairness) [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1].\n\n---\n\n### 1. Federal backdrop – arbitration clauses are generally enforceable  \n\n| Point | Source |\n|-------|--------|\n| The Federal Arbitration Act (FAA) declares written arbitration provisions “valid, irrevocable, and enforceable” unless a legal or equitable ground for revocation exists [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1]. |\n| *AT&T Mobility LLC v. Concepcion* (2011) held that the FAA **preempts state laws** that forbid class‑action waivers in consumer contracts, allowing companies to require individual arbitration and to bar class actions [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1]. |\n\n**Implication:**  On its face, a mandatory arbitration clause with a class‑action waiver is presumptively enforceable under federal law.\n\n---\n\n### 2. State‑law defense – unconscionability  \n\n| Element | Description | Source |\n|---------|-------------|--------|\n| **Procedural unconscionability** – “take‑it‑or‑leave‑it” adhesion contracts, hidden in fine print, surprise, unequal bargaining power. | [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1] |\n| **Substantive unconscionability** – terms that are “overly harsh or one‑sided,” such as forcing the consumer to pay exorbitant filing fees, limiting statutory damages, or selecting an inconvenient venue. | [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1] |\n| **Sliding‑scale rule** – the more severe the substantive unfairness, the less procedural unfairness is required to invalidate the clause. | [Doc: 10_Arbitration_Consumer_Agreement.md, Page: 1] |\n\n**Application to the cost‑vs‑recovery scenario**\n\n* The clause that obligates the consumer to bear arbitration fees **could be viewed as substantively unconscionable** if those fees are “exorbitant” relative to the likely recovery (i.e., the consumer would pay more than they would receive).  \n* Whether the fees are “exorbitant” is a factual determination; courts look at the magnitude of the fees compared with the expected damages.  \n* If the arbitration provision is also presented in a standard‑form adhesion contract with no meaningful negotiation, **procedural unconscionability** may be found as well.\n\n---\n\n### 3. Likely judicial outcome  \n\n| Factor | Likely effect",
     "citations": [
       {
         "document_name": "10_Arbitration_Consumer_Agreement.md",
         "page_number": 1,
-        "excerpt": "**15.3 Unconscionability and Enforceability:**\nIn accordance with precedent such as *AT&T Mobility LLC v. Concepcion* and related state unconscionability doctrines, a mandatory arbitration clause with a class action waiver may be deemed substantively unconscionable if the individual recovery sought"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 11,
-        "excerpt": "Legal Assistants Powered by Agentic RAG  |  Student Project Guide \nGen AI Capstone Project \n \n \nConfidential — For Educational Use Only \n11 \n2026 \nof $15 per month over 3 years. Individual \narbitration would cost more than any \nindividual's recovery. \nLegal Issues \n1) Is the arbitration clause \nunco"
-      },
-      {
-        "document_name": "Legal_AI_Assistant_Final_Project_ABS.pdf",
-        "page_number": 10,
-        "excerpt": "cover this data? 3) What remedies are \navailable — injunction, damages, \nattorney's fees? \nQuery for RAG \n\"Trade secret misappropriation customer \nlist Defend Trade Secrets Act injunctive \nrelief departing employee\" \n \n⚖ Case 10 — Arbitration Clause \nUnconscionability \nCase Facts \nA consumer signed"
+        "excerpt": "# Arbitration and Class Action Waivers in Consumer Contracts\n\n## 1. The Federal Arbitration Act (FAA)\nThe Federal Arbitration Act (9 U.S.C. § 2) establishes a liberal federal policy favoring arbitration agreements, declaring that written arbitration provisions \"shall be valid, irrevocable, and enfor"
       },
       {
         "document_name": "10_Arbitration_Consumer_Agreement.md",
         "page_number": 1,
-        "excerpt": "# CONSUMER TERMS OF SERVICE AND ARBITRATION AGREEMENT\n## SECTION 15. DISPUTE RESOLUTION AND BINDING ARBITRATION\n\n**15.1 Mandatory Arbitration.**\nAny dispute, claim, or controversy arising out of or relating to this Agreement or the breach, termination, enforcement, interpretation, or validity thereo"
+        "excerpt": "## 3. Defenses to Enforcement: Unconscionability\nWhile the FAA strongly protects arbitration agreements, they can still be invalidated under general state contract law principles, most notably **unconscionability**, which requires two prongs:\n1. **Procedural Unconscionability**: Relates to the makin"
       },
       {
         "document_name": "05_Liquidated_Damages_Contract.md",
         "page_number": 1,
-        "excerpt": "**Unenforceable Penalty:**\nIf the stipulated sum is extravagant, unconscionable, or vastly disproportionate to the greatest possible loss that could foreseeably follow from the breach, the court will strike it down as a penalty. A clause is considered a penalty if its primary purpose is to punish th"
+        "excerpt": "# Liquidated Damages vs. Unenforceable Penalties\n\n## 1. Legal Standard for Liquidated Damages\nA liquidated damages clause specifies a predetermined amount of money that must be paid as damages for failure to perform under a contract. To be enforceable under US common law and the Uniform Commercial C"
+      },
+      {
+        "document_name": "10_Arbitration_Consumer_Agreement.md",
+        "page_number": 1,
+        "excerpt": "## 4. The Mass Arbitration Response\nIn response to class action waivers, plaintiff firms developed the \"mass arbitration\" strategy: filing thousands of individual arbitration demands simultaneously. Since arbitration rules (like AAA or JAMS) often require the company to pay the bulk of the filing an"
+      },
+      {
+        "document_name": "05_Liquidated_Damages_Contract.md",
+        "page_number": 1,
+        "excerpt": "If the amount is designed primarily to punish the breaching party or coerce performance, courts will strike it down as an **unenforceable penalty**.\n\n## 2. Multi-Jurisdictional Approaches\n### United Kingdom (*Cavendish Square* Reform)\nIn *Cavendish Square Holding BV v. Talal El Makdessi (2015)*, the"
       }
     ],
-    "latency_s": 10.48,
+    "latency_s": 7.09,
     "task_success": true
   }
 ]

@@ -16,7 +16,7 @@ import urllib.error
 # ─── CONFIG — AUTOMATED ──────────────────────────────────────────────────────
 BASE_URL    = "http://localhost:8000/api/v1"
 EMAIL       = "day1@legal.ai"
-PASSWORD    = "test123"
+PASSWORD    = "test123@"
 # ─────────────────────────────────────────────────────────────────────────────
 
 # 10 test cases from the capstone PDF — one query per legal scenario
@@ -90,6 +90,13 @@ def make_request(method, url, payload=None, token=None):
 
 def get_token():
     print(f"Logging in as {EMAIL}...")
+    try:
+        make_request("POST", f"{BASE_URL}/auth/register", {"email": EMAIL, "password": PASSWORD})
+        print("Registered new test user.")
+    except Exception as e:
+        if "already exists" not in str(e).lower() and "400" not in str(e):
+            pass # ignore, try login anyway
+            
     res = make_request("POST", f"{BASE_URL}/auth/login", {"email": EMAIL, "password": PASSWORD})
     return res["access_token"]
 
