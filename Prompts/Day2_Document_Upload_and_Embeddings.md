@@ -19,9 +19,9 @@ The primary source for the 10 legal test cases is:
 ```
 pymupdf==1.24.3
 python-docx==1.1.0
-langchain-text-splitters==0.2.0
-sentence-transformers==2.7.0
-chromadb==0.5.0
+langchain-text-splitters>=0.2.0
+sentence-transformers>=2.7.0
+chromadb>=0.5.0
 ```
 
 Then run:
@@ -75,17 +75,16 @@ def embed_batch(texts: list[str]) -> list[list[float]]:
 import uuid
 from functools import lru_cache
 import chromadb
-from chromadb.config import Settings as ChromaSettings
 from app.config import settings
 
 
 @lru_cache(maxsize=1)
 def get_chroma_collection():
-    """Initialize ChromaDB with persistent local storage. Called once."""
-    client = chromadb.PersistentClient(
-        path=settings.CHROMA_PERSIST_PATH,
-        settings=ChromaSettings(anonymized_telemetry=False)
-    )
+    """
+    Initialize ChromaDB with persistent local storage. Called once.
+    Compatible with chromadb >= 0.5.0 (including 1.x).
+    """
+    client = chromadb.PersistentClient(path=settings.CHROMA_PERSIST_PATH)
     return client.get_or_create_collection(
         name="legal_chunks",
         metadata={"hnsw:space": "cosine"}
@@ -192,11 +191,16 @@ class ProcessedChunk(NamedTuple):
     chunk_index: int
 
 
+SUPPORTED_EXTENSIONS: set[str] = {".pdf", ".txt", ".md", ".docx"}
+
+
 def extract_text_by_page(file_path: str) -> list[PageText]:
     """
     Extract text from a document, returning one PageText per page/section.
     Supports: .pdf, .txt, .md, .docx
+    Raises UnsupportedFileTypeError for unknown extensions.
     """
+    from app.exceptions import UnsupportedFileTypeError
     ext = Path(file_path).suffix.lower()
 
     if ext == ".pdf":
@@ -206,7 +210,7 @@ def extract_text_by_page(file_path: str) -> list[PageText]:
     elif ext == ".docx":
         return _extract_docx(file_path)
     else:
-        raise ValueError(f"Unsupported file type: {ext}")
+        raise UnsupportedFileTypeError(ext, SUPPORTED_EXTENSIONS)
 
 
 def _extract_pdf(file_path: str) -> list[PageText]:
@@ -339,22 +343,32 @@ class DocumentResponse(BaseModel):
 **File: `backend\app\services\document_service.py`**
 
 ```python
-import os
 import uuid
 from pathlib import Path
 from sqlalchemy.orm import Session
-from fastapi import HTTPException, UploadFile, status
+from fastapi import UploadFile
 from app.config import settings
 from app.models.document import Document
 from app.ai.embedder import embed_batch
 from app.ai.vector_store import add_chunks, delete_document_chunks
 from app.utils.pdf_processor import extract_text_by_page, chunk_pages, get_page_count
+from app.exceptions import (
+    UnsupportedFileTypeError,
+    FileSizeLimitError,
+    DocumentNotFoundError,
+    DocumentProcessingError,
+)
 
 ALLOWED_EXTENSIONS = {".pdf", ".txt", ".md", ".docx"}
 MAX_BYTES = settings.MAX_FILE_SIZE_MB * 1024 * 1024
 
 
 class DocumentService:
+    """
+    Document business logic. HTTP-agnostic: raises domain exceptions only.
+    main.py exception handlers translate them to HTTP responses.
+    """
+
     def __init__(self, db: Session):
         self.db = db
 
@@ -367,23 +381,21 @@ class DocumentService:
         )
 
     async def upload_document(self, file: UploadFile, user_id: str) -> Document:
-        # --- Validation ---
+        # --- Validation (raises domain exceptions) ---
         ext = Path(file.filename).suffix.lower()
         if ext not in ALLOWED_EXTENSIONS:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST,
-                                detail=f"Unsupported file type '{ext}'. Allowed: PDF, TXT, MD, DOCX")
+            raise UnsupportedFileTypeError(ext, ALLOWED_EXTENSIONS)  # → 400
 
         content = await file.read()
         if len(content) > MAX_BYTES:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST,
-                                detail=f"File exceeds {settings.MAX_FILE_SIZE_MB} MB limit")
+            raise FileSizeLimitError(len(content), MAX_BYTES)  # → 400
 
         # --- Save file to disk ---
-        doc_id    = str(uuid.uuid4())
-        safe_name = f"{doc_id}{ext}"
+        doc_id     = str(uuid.uuid4())
+        safe_name  = f"{doc_id}{ext}"
         upload_dir = Path(settings.UPLOAD_DIR) / user_id
         upload_dir.mkdir(parents=True, exist_ok=True)
-        file_path = upload_dir / safe_name
+        file_path  = upload_dir / safe_name
         file_path.write_bytes(content)
 
         # --- Create DB record (status = processing) ---
@@ -399,14 +411,13 @@ class DocumentService:
 
         # --- Process: extract → chunk → embed → store ---
         try:
-            pages       = extract_text_by_page(str(file_path))
-            raw_chunks  = chunk_pages(pages)
-            page_count  = get_page_count(str(file_path))
+            pages      = extract_text_by_page(str(file_path))
+            raw_chunks = chunk_pages(pages)
+            page_count = get_page_count(str(file_path))
 
             if not raw_chunks:
-                raise ValueError("No text could be extracted from the document")
+                raise DocumentProcessingError("No text could be extracted from the document")
 
-            # Embed all chunks in one batch call
             texts      = [c.text for c in raw_chunks]
             embeddings = embed_batch(texts)
 
@@ -420,24 +431,22 @@ class DocumentService:
                 for i in range(len(raw_chunks))
             ]
 
-            add_chunks(
-                chunks=prepared,
-                user_id=user_id,
-                document_id=doc_id,
-                filename=file.filename,
-            )
+            add_chunks(chunks=prepared, user_id=user_id,
+                       document_id=doc_id, filename=file.filename)
 
-            # Update document record to ready
             document.status     = "ready"
             document.page_count = page_count
             self.db.commit()
             self.db.refresh(document)
 
+        except (UnsupportedFileTypeError, FileSizeLimitError, DocumentProcessingError):
+            document.status = "failed"
+            self.db.commit()
+            raise
         except Exception as exc:
             document.status = "failed"
             self.db.commit()
-            raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=f"Processing failed: {str(exc)}")
+            raise DocumentProcessingError(f"Processing failed: {exc}") from exc
 
         return document
 
@@ -448,18 +457,15 @@ class DocumentService:
             .first()
         )
         if not document:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Document not found")
+            raise DocumentNotFoundError(document_id)  # → 404
 
-        # Delete vectors from ChromaDB first
         delete_document_chunks(document_id)
 
-        # Delete file from disk
         ext       = Path(document.filename).suffix.lower()
         file_path = Path(settings.UPLOAD_DIR) / user_id / f"{document_id}{ext}"
         if file_path.exists():
             file_path.unlink()
 
-        # Delete DB record
         self.db.delete(document)
         self.db.commit()
 ```
@@ -638,7 +644,8 @@ export default function DocumentCard({ document, onDeleted }: Props) {
 **File: `frontend\src\components\documents\UploadDropzone.tsx`**
 
 ```typescript
-import { useState, DragEvent, ChangeEvent, useRef } from "react";
+import { useState, useRef } from "react";
+import type { DragEvent, ChangeEvent } from "react";
 import { uploadDocument } from "../../api/documents.api";
 import type { Document } from "../../types/document.types";
 import Button from "../ui/Button";
@@ -779,10 +786,40 @@ export default function DocumentsPage() {
 }
 ```
 
-Update `frontend\src\router.tsx` — replace the Documents placeholder import with the real page:
+**Replace `frontend\src\router.tsx`** — wire up real `DocumentsPage`:
+
 ```typescript
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
+import type { ReactNode } from "react";
+import LoginPage     from "./pages/LoginPage";
+import RegisterPage  from "./pages/RegisterPage";
 import DocumentsPage from "./pages/DocumentsPage";
-// replace: <Placeholder title="Documents" /> with <DocumentsPage />
+
+function ProtectedRoute({ children }: { children: ReactNode }) {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+}
+
+const Placeholder = ({ title }: { title: string }) => (
+  <div className="min-h-screen flex items-center justify-center bg-surface">
+    <div className="text-center">
+      <h1>{title}</h1>
+      <p className="text-muted mt-2 text-sm">Coming in Day 3–4</p>
+    </div>
+  </div>
+);
+
+export const router = createBrowserRouter([
+  { path: "/",                element: <Navigate to="/login" replace /> },
+  { path: "/login",           element: <LoginPage /> },
+  { path: "/register",        element: <RegisterPage /> },
+  { path: "/documents",       element: <ProtectedRoute><DocumentsPage /></ProtectedRoute> },
+  { path: "/chat",            element: <ProtectedRoute><Placeholder title="Chat" /></ProtectedRoute> },
+  { path: "/chat/:sessionId", element: <ProtectedRoute><Placeholder title="Chat Session" /></ProtectedRoute> },
+  { path: "/history",         element: <ProtectedRoute><Placeholder title="History" /></ProtectedRoute> },
+  { path: "*",                element: <Navigate to="/login" replace /> },
+]);
 ```
 
 ---

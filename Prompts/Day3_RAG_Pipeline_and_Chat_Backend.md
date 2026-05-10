@@ -13,11 +13,11 @@ Days 1 and 2 are complete. Documents are uploaded, chunked, embedded, and stored
 
 **Append to `backend\requirements.txt`:**
 ```
-langchain==0.2.6
-langchain-core==0.2.10
-langchain-openai==0.1.14
-langchain-ollama==0.1.1
-openai==1.35.3
+langchain>=0.2.6
+langchain-core>=0.2.10
+langchain-openai>=0.1.14
+langchain-ollama>=0.1.1
+openai>=1.35.3
 ```
 
 Run:
@@ -364,7 +364,7 @@ class MessageResponse(BaseModel):
 ```python
 import uuid
 from sqlalchemy.orm import Session
-from fastapi import HTTPException, status
+from app.exceptions import ChatSessionNotFoundError
 from app.models.chat import ChatSession, ChatMessage
 from app.schemas.chat_schemas import CreateSessionRequest, SendMessageRequest, MessageResponse
 from app.services.rag_service import RAGService
@@ -377,8 +377,7 @@ class ChatService:
 
     def create_session(self, request: CreateSessionRequest, user_id: str) -> ChatSession:
         if not request.document_ids:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST,
-                                detail="At least one document must be selected")
+            raise ValueError("At least one document must be selected")
         session = ChatSession(
             id=str(uuid.uuid4()),
             user_id=user_id,
@@ -469,7 +468,7 @@ class ChatService:
             .first()
         )
         if not session:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Chat session not found")
+            raise ChatSessionNotFoundError()
         return session
 ```
 

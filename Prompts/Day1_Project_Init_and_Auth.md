@@ -140,6 +140,61 @@ settings = get_settings()
 
 ---
 
+### TASK 2.5 — Create Domain Exception Hierarchy
+
+> **🔴 Critical Fix:** Services must never raise `HTTPException` directly. Domain exceptions decouple business logic from the HTTP layer. A global handler in `main.py` (Task 9) translates them to HTTP responses.
+
+**File: `backend\app\exceptions.py`** — create new file:
+
+```python
+class LegalAIError(Exception):
+    """Base exception for all domain errors in the Legal AI Assistant."""
+
+
+class AuthenticationError(LegalAIError):
+    """Raised when credentials are invalid or a token cannot be verified."""
+
+
+class DuplicateEmailError(LegalAIError):
+    """Raised when registration is attempted with an existing email."""
+    def __init__(self, email: str) -> None:
+        super().__init__(f"An account with email '{email}' already exists.")
+        self.email = email
+
+
+class DocumentNotFoundError(LegalAIError):
+    """Raised when a document does not exist or does not belong to the requester."""
+    def __init__(self, document_id: str) -> None:
+        super().__init__(f"Document '{document_id}' not found.")
+        self.document_id = document_id
+
+
+class DocumentProcessingError(LegalAIError):
+    """Raised when text extraction or embedding fails."""
+
+
+class ChatSessionNotFoundError(LegalAIError):
+    """Raised when a chat session does not exist or does not belong to the user."""
+
+
+class UnsupportedFileTypeError(LegalAIError):
+    """Raised when an uploaded file has an unsupported extension."""
+    def __init__(self, extension: str, supported: set[str]) -> None:
+        super().__init__(
+            f"File type '{extension}' is not supported. "
+            f"Supported: {', '.join(sorted(supported))}"
+        )
+
+
+class FileSizeLimitError(LegalAIError):
+    """Raised when an uploaded file exceeds the maximum allowed size."""
+    def __init__(self, actual_bytes: int, max_bytes: int) -> None:
+        max_mb = max_bytes // (1024 * 1024)
+        super().__init__(f"File size {actual_bytes // 1024} KB exceeds the {max_mb} MB limit.")
+```
+
+---
+
 ### TASK 3 — Implement the Database Layer (SQLite, No Migrations)
 
 **File: `backend\app\database.py`**
@@ -204,8 +259,8 @@ class User(Base):
 from datetime import datetime, timedelta, timezone
 from jose import jwt, JWTError
 from passlib.context import CryptContext
-from fastapi import HTTPException, status
 from app.config import settings
+from app.exceptions import AuthenticationError  # domain exception — NOT HTTPException
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -228,17 +283,21 @@ def create_access_token(user_id: str) -> str:
 
 
 def decode_access_token(token: str) -> str:
-    """Returns user_id (sub) from a valid token. Raises HTTPException on failure."""
+    """
+    Returns user_id (sub) from a valid JWT.
+    Raises AuthenticationError (domain exception) on failure.
+    The caller (dependencies.py) is responsible for translating this to HTTP 401.
+
+    🔴 Fix: utils must be HTTP-agnostic. Never raise HTTPException here.
+    """
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
         user_id: str = payload.get("sub")
         if user_id is None:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                                detail="Invalid token payload")
+            raise AuthenticationError("Invalid token payload")
         return user_id
-    except JWTError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail="Token is invalid or expired")
+    except JWTError as exc:
+        raise AuthenticationError("Token is invalid or expired") from exc
 ```
 
 ---
@@ -288,23 +347,25 @@ class UserResponse(BaseModel):
 
 ```python
 from sqlalchemy.orm import Session
-from fastapi import HTTPException, status
 from app.models.user import User
 from app.schemas.auth_schemas import RegisterRequest, LoginRequest, TokenResponse
 from app.utils.security import hash_password, verify_password, create_access_token
+from app.exceptions import DuplicateEmailError, AuthenticationError  # domain exceptions
 
 
 class AuthService:
+    """
+    Auth business logic. HTTP-agnostic: raises domain exceptions only.
+    main.py exception handlers translate them to 400/401 responses.
+    """
+
     def __init__(self, db: Session):
         self.db = db
 
     def register(self, request: RegisterRequest) -> dict:
         existing = self.db.query(User).filter(User.email == request.email).first()
         if existing:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="An account with this email already exists"
-            )
+            raise DuplicateEmailError(request.email)  # → global handler → 400
         user = User(
             email=request.email,
             password_hash=hash_password(request.password)
@@ -317,10 +378,7 @@ class AuthService:
     def login(self, request: LoginRequest) -> TokenResponse:
         user = self.db.query(User).filter(User.email == request.email).first()
         if not user or not verify_password(request.password, user.password_hash):
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Incorrect email or password"
-            )
+            raise AuthenticationError("Incorrect email or password")  # → global handler → 401
         token = create_access_token(user.id)
         return TokenResponse(access_token=token)
 ```
@@ -339,6 +397,7 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.utils.security import decode_access_token
 from app.models.user import User
+from app.exceptions import AuthenticationError
 
 bearer_scheme = HTTPBearer()
 
@@ -355,12 +414,26 @@ def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
     db: Session = Depends(get_db),
 ) -> User:
+    """
+    Boundary layer: catches AuthenticationError from decode_access_token
+    and translates it to HTTP 401. This is the ONLY place that conversion happens.
+    """
     token = credentials.credentials
-    user_id = decode_access_token(token)
+    try:
+        user_id = decode_access_token(token)
+    except AuthenticationError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=str(exc),
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail="User not found")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     return user
 ```
 
@@ -421,11 +494,52 @@ router = APIRouter(prefix="/chat", tags=["Chat"])
 **File: `backend\app\main.py`**
 
 ```python
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from app.config import settings
 from app.database import init_db
 from app.routers import auth, documents, chat
+from app.exceptions import (
+    DuplicateEmailError, AuthenticationError,
+    DocumentNotFoundError, DocumentProcessingError,
+    ChatSessionNotFoundError, UnsupportedFileTypeError, FileSizeLimitError,
+)
+
+
+def register_exception_handlers(app: FastAPI) -> None:
+    """
+    Centralised domain exception → HTTP response mapping.
+    Services raise typed domain exceptions; this handler converts them.
+    Services remain completely HTTP-agnostic.
+    """
+    @app.exception_handler(DuplicateEmailError)
+    async def duplicate_email(_: Request, exc: DuplicateEmailError):
+        return JSONResponse(status_code=400, content={"detail": str(exc)})
+
+    @app.exception_handler(AuthenticationError)
+    async def auth_error(_: Request, exc: AuthenticationError):
+        return JSONResponse(status_code=401, content={"detail": str(exc)})
+
+    @app.exception_handler(DocumentNotFoundError)
+    async def doc_not_found(_: Request, exc: DocumentNotFoundError):
+        return JSONResponse(status_code=404, content={"detail": str(exc)})
+
+    @app.exception_handler(UnsupportedFileTypeError)
+    async def unsupported_type(_: Request, exc: UnsupportedFileTypeError):
+        return JSONResponse(status_code=400, content={"detail": str(exc)})
+
+    @app.exception_handler(FileSizeLimitError)
+    async def file_too_large(_: Request, exc: FileSizeLimitError):
+        return JSONResponse(status_code=400, content={"detail": str(exc)})
+
+    @app.exception_handler(DocumentProcessingError)
+    async def processing_error(_: Request, exc: DocumentProcessingError):
+        return JSONResponse(status_code=500, content={"detail": str(exc)})
+
+    @app.exception_handler(ChatSessionNotFoundError)
+    async def session_not_found(_: Request, exc: ChatSessionNotFoundError):
+        return JSONResponse(status_code=404, content={"detail": str(exc)})
 
 
 def create_app() -> FastAPI:
@@ -442,6 +556,8 @@ def create_app() -> FastAPI:
         allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
         allow_headers=["Authorization", "Content-Type"],
     )
+
+    register_exception_handlers(app)   # ← all domain → HTTP translation lives here
 
     app.include_router(auth.router,      prefix="/api/v1")
     app.include_router(documents.router, prefix="/api/v1")
@@ -939,3 +1055,21 @@ Before closing Day 1, confirm every item below passes:
 - [ ] Refreshing `/documents` while logged in stays on the page (token persists in localStorage)
 - [ ] Navigating to `/documents` while logged out redirects to `/login`
 - [ ] File `legal_assistant.db` exists in `backend\` with a `users` table containing your test user
+
+---
+
+### ARCHITECTURE NOTE — v1 Build vs v2 Target
+
+> This Day 1 prompt delivers the **SE-compliant v2 architecture** directly.
+> The key design contract enforced from Day 1:
+>
+> | Layer | Rule |
+> |---|---|
+> | `utils/security.py` | Raises `AuthenticationError` — no `HTTPException` |
+> | `services/auth_service.py` | Raises `DuplicateEmailError` / `AuthenticationError` — no `HTTPException` |
+> | `dependencies.py` | **Only** boundary that catches domain exceptions and converts to HTTP |
+> | `main.py` | `register_exception_handlers()` maps all domain exceptions to HTTP codes |
+> | `exceptions.py` | Single source of truth for all domain errors (`FileSizeLimitError`, `UnsupportedFileTypeError`, etc. used by Days 2–3) |
+>
+> When Days 2 and 3 add `DocumentService` and `ChatService`, follow the same contract:
+> raise domain exceptions from `exceptions.py`, never `HTTPException`.

@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&family=Manrope:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { 
+    @apply bg-[#0b1326] text-white antialiased selection:bg-indigo-500/30;
+    font-family: 'Manrope', 'Hanken Grotesk', sans-serif;
+  }
+  html {
+    color-scheme: dark;
+  }
+  
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-surface-variant rounded-full hover:bg-outline-variant transition-colors; }
+}
+
+@layer utilities {
+  /* Background gradient animation for CTA buttons */
+  .bg-size-200 { background-size: 200% 200%; }
+  .bg-pos-0    { background-position: 0% 50%; }
+  .bg-pos-100  { background-position: 100% 50%; }
+  
+  /* Glassmorphic border-t helper */
+  .border-white\/8 { border-color: rgba(255, 255, 255, 0.08); }
+  
+  /* Progress activity spin */
+  @keyframes progress-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .animate-progress { animation: progress-spin 1s linear infinite; }
+}
+
