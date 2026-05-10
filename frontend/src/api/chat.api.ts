@@ -15,23 +15,25 @@ export const deleteSession = (id: string): Promise<void> =>
 export const getMessages = (sessionId: string): Promise<ChatMessage[]> =>
   client.get<ChatMessage[]>(`/chat/sessions/${sessionId}/messages`).then(r => r.data);
 
-export const sendMessage = (sessionId: string, content: string): Promise<ChatMessage> =>
-  client.post<ChatMessage>(`/chat/sessions/${sessionId}/messages`, { content }).then(r => r.data);
+export const sendMessage = (sessionId: string, content: string, isThinkingMode: boolean = false): Promise<ChatMessage> =>
+  client.post<ChatMessage>(`/chat/sessions/${sessionId}/messages`, { content, is_thinking_mode: isThinkingMode }).then(r => r.data);
 
 /**
  * Streaming message send — uses native fetch with ReadableStream.
  * Parses SSE events from the backend /stream endpoint.
  *
- * @param sessionId   Active chat session ID
- * @param content     User message text
- * @param onToken     Called for each streamed token (append to UI)
- * @param onCitations Called once when citations payload arrives
- * @param onDone      Called when stream completes
- * @param onError     Called on network or server error
+ * @param sessionId      Active chat session ID
+ * @param content        User message text
+ * @param isThinkingMode Whether to use the advanced reasoning model
+ * @param onToken        Called for each streamed token (append to UI)
+ * @param onCitations    Called once when citations payload arrives
+ * @param onDone         Called when stream completes
+ * @param onError        Called on network or server error
  */
 export async function streamMessage(
   sessionId: string,
   content: string,
+  isThinkingMode: boolean,
   onToken: (token: string) => void,
   onCitations: (citations: Citation[]) => void,
   onDone: () => void,
@@ -48,7 +50,7 @@ export async function streamMessage(
         "Content-Type":  "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({ content, is_thinking_mode: isThinkingMode }),
     });
   } catch {
     onError("Network error: could not reach the server.");
