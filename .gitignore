@@ -1,6 +1,7 @@
 # User Specific Ignores
 Docs/
 Prompts/
+PDF/
 Legal_Documents/*.pdf
 backend/uploads/
 
