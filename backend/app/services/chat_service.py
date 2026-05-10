@@ -75,6 +75,7 @@ class ChatService:
             query=request.content,
             user_id=user_id,
             document_ids=document_ids,
+            is_thinking_mode=request.is_thinking_mode,
         )
 
         # 3. Save assistant response
@@ -133,15 +134,14 @@ class ChatService:
             query_embedding=query_embedding,
             user_id=user_id,
             document_ids=document_ids,
-            top_k=5,
+            top_k=3,
         )
 
         # 3. Stream tokens from LLM; accumulate full answer for DB storage
         full_answer = []
         final_citations = []
 
-        for sse_event in stream_rag_chain(request.content, chunks):
-            # Parse SSE events: extract citations payload before yielding
+        for sse_event in stream_rag_chain(request.content, chunks, request.is_thinking_mode):
             if sse_event.startswith("data: [CITATIONS]"):
                 import json
                 citations_json = sse_event[len("data: [CITATIONS]"):].strip()
@@ -151,7 +151,6 @@ class ChatService:
                     final_citations = []
                 yield sse_event
             elif sse_event.startswith("data: [DONE]"):
-                # Save complete response to DB before signalling done
                 assistant_msg = ChatMessage(
                     id=str(uuid.uuid4()),
                     session_id=session_id,
@@ -165,7 +164,6 @@ class ChatService:
             elif sse_event.startswith("data: [ERROR]"):
                 yield sse_event
             else:
-                # Regular token — accumulate text (strip SSE prefix)
                 token = sse_event[len("data: "):].rstrip("\n")
                 full_answer.append(token)
                 yield sse_event
@@ -179,4 +177,3 @@ class ChatService:
         if not session:
             raise ChatSessionNotFoundError()
         return session
-

@@ -1,105 +1,80 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from app.dependencies import get_db, get_current_user
-from app.models.user import User
-from app.schemas.chat_schemas import (
-    CreateSessionRequest, SessionResponse,
-    SendMessageRequest, MessageResponse,
-)
+from app.schemas.chat_schemas import CreateSessionRequest, SessionResponse, SendMessageRequest, MessageResponse
 from app.services.chat_service import ChatService
+from app.models.user import User
 
-router = APIRouter(prefix="/chat", tags=["Chat"])
+
+router = APIRouter(prefix="/chat", tags=["chat"])
 
 
-@router.post("/sessions", response_model=SessionResponse, status_code=201)
+@router.post("/sessions", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
 def create_session(
-    body: CreateSessionRequest,
-    current_user: User = Depends(get_current_user),
+    request: CreateSessionRequest,
     db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
 ):
-    session = ChatService(db).create_session(body, current_user.id)
-    return SessionResponse(
-        id=session.id, title=session.title,
-        document_ids=session.get_document_ids(), created_at=session.created_at,
-    )
+    """Create a new chat session scoped to specific documents."""
+    service = ChatService(db)
+    return service.create_session(request, user.id)
 
 
 @router.get("/sessions", response_model=list[SessionResponse])
 def list_sessions(
-    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
 ):
-    sessions = ChatService(db).list_sessions(current_user.id)
-    return [
-        SessionResponse(id=s.id, title=s.title,
-                        document_ids=s.get_document_ids(), created_at=s.created_at)
-        for s in sessions
-    ]
+    """List all chat sessions for the current user."""
+    service = ChatService(db)
+    return service.list_sessions(user.id)
 
 
-@router.delete("/sessions/{session_id}", status_code=204)
+@router.delete("/sessions/{session_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_session(
     session_id: str,
-    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
 ):
-    ChatService(db).delete_session(session_id, current_user.id)
+    """Delete a chat session."""
+    service = ChatService(db)
+    service.delete_session(session_id, user.id)
 
 
 @router.get("/sessions/{session_id}/messages", response_model=list[MessageResponse])
 def get_messages(
     session_id: str,
-    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
 ):
-    messages = ChatService(db).get_messages(session_id, current_user.id)
-    return [
-        MessageResponse(
-            id=m.id, session_id=m.session_id, role=m.role,
-            content=m.content, citations=m.get_citations(), created_at=m.created_at,
-        )
-        for m in messages
-    ]
+    """Get all messages in a chat session."""
+    service = ChatService(db)
+    return service.get_messages(session_id, user.id)
 
 
 @router.post("/sessions/{session_id}/messages", response_model=MessageResponse)
 def send_message(
     session_id: str,
-    body: SendMessageRequest,
-    current_user: User = Depends(get_current_user),
+    request: SendMessageRequest,
     db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
 ):
-    return ChatService(db).handle_message(session_id, body, current_user.id)
+    """Send a message to a session and get a blocking response."""
+    service = ChatService(db)
+    return service.handle_message(session_id, request, user.id)
 
 
 @router.post("/sessions/{session_id}/stream")
-def stream_message(
+def send_message_stream(
     session_id: str,
-    body: SendMessageRequest,
-    current_user: User = Depends(get_current_user),
+    request: SendMessageRequest,
     db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
 ):
-    """
-    Streaming endpoint — returns Server-Sent Events (SSE).
-
-    SSE protocol:
-      data: <token>\\n\\n           — one token at a time during generation
-      data: [CITATIONS]<json>\\n\\n — full citations array after generation
-      data: [DONE]\\n\\n            — stream complete
-
-    The caller must save the user message and reload messages after [DONE].
-    The backend saves the full assistant response to the DB when stream ends.
-    """
+    """Send a message and get a Server-Sent Events (SSE) streaming response."""
     service = ChatService(db)
-    generator = service.handle_message_stream(session_id, body, current_user.id)
     return StreamingResponse(
-        generator,
-        media_type="text/event-stream",
-        headers={
-            "Cache-Control": "no-cache",
-            "X-Accel-Buffering": "no",       # disable nginx buffering
-            "Access-Control-Allow-Origin": "*",
-        },
+        service.handle_message_stream(session_id, request, user.id),
+        media_type="text/event-stream"
     )
-
