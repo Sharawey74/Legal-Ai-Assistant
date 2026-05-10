@@ -9,8 +9,10 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = "BAAI/bge-base-en-v1.5"
     LLM_PROVIDER: str = "openrouter"
     OPENROUTER_API_KEY: str = ""
+    OPENROUTER_THINKING_API_KEY: str = ""
     OPENROUTER_MODEL: str = "openai/gpt-oss-120b"
-    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    OPENROUTER_THINKING_MODEL: str = "zhipu/glm-4.5-air"
+    OLLAMA_BASE_URL: str = "http://localhost:11500"
     OLLAMA_MODEL: str = "llama3.2:3b"
     UPLOAD_DIR: str = "./uploads"
     MAX_FILE_SIZE_MB: int = 20

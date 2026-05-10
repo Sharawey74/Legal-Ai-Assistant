@@ -1,24 +1,18 @@
-import uuid, json
-from datetime import datetime, timezone
-from sqlalchemy import String, DateTime, Text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+import json
 from app.database import Base
+from sqlalchemy import Column, String, DateTime, Text
+from sqlalchemy.sql import func
+import uuid
 
 
 class ChatSession(Base):
     __tablename__ = "chat_sessions"
 
-    id: Mapped[str] = mapped_column(
-        String, primary_key=True, default=lambda: str(uuid.uuid4())
-    )
-    user_id: Mapped[str] = mapped_column(
-        String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
-    )
-    title:        Mapped[str]      = mapped_column(String(255), default="New Chat")
-    document_ids: Mapped[str]      = mapped_column(Text, default="[]")   # JSON string
-    created_at:   Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
-    )
+    id           = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id      = Column(String, nullable=False, index=True)
+    title        = Column(String, nullable=False, default="New Chat")
+    document_ids = Column(Text, nullable=False, default="[]")   # JSON list of document UUIDs
+    created_at   = Column(DateTime(timezone=True), server_default=func.now())
 
     def get_document_ids(self) -> list[str]:
         return json.loads(self.document_ids)
@@ -30,18 +24,12 @@ class ChatSession(Base):
 class ChatMessage(Base):
     __tablename__ = "chat_messages"
 
-    id: Mapped[str] = mapped_column(
-        String, primary_key=True, default=lambda: str(uuid.uuid4())
-    )
-    session_id: Mapped[str] = mapped_column(
-        String, ForeignKey("chat_sessions.id", ondelete="CASCADE"), nullable=False, index=True
-    )
-    role:       Mapped[str] = mapped_column(String(20), nullable=False)  # user | assistant
-    content:    Mapped[str] = mapped_column(Text, nullable=False)
-    citations:  Mapped[str] = mapped_column(Text, default="[]")          # JSON string
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
-    )
+    id         = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    session_id = Column(String, nullable=False, index=True)
+    role       = Column(String, nullable=False)          # "user" | "assistant"
+    content    = Column(Text, nullable=False)
+    citations  = Column(Text, nullable=False, default="[]")  # JSON list of citation dicts
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     def get_citations(self) -> list[dict]:
         return json.loads(self.citations)

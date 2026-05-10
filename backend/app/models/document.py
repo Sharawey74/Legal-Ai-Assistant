@@ -1,23 +1,17 @@
-import uuid
-from datetime import datetime, timezone
-from sqlalchemy import String, Integer, DateTime, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base
+from sqlalchemy import Column, String, Integer, DateTime, Text
+from sqlalchemy.sql import func
+import uuid
 
 
 class Document(Base):
     __tablename__ = "documents"
 
-    id: Mapped[str] = mapped_column(
-        String, primary_key=True, default=lambda: str(uuid.uuid4())
-    )
-    user_id: Mapped[str] = mapped_column(
-        String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
-    )
-    filename:   Mapped[str] = mapped_column(String(255), nullable=False)
-    file_size:  Mapped[int] = mapped_column(Integer, nullable=False)
-    page_count: Mapped[int] = mapped_column(Integer, default=0)
-    status:     Mapped[str] = mapped_column(String(20), default="processing")
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
-    )
+    id          = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id     = Column(String, nullable=False, index=True)
+    filename    = Column(String, nullable=False)
+    file_path   = Column(String, nullable=False)
+    file_size   = Column(Integer, nullable=False, default=0)
+    page_count  = Column(Integer, nullable=False, default=0)
+    status      = Column(String, nullable=False, default="processing")   # processing | ready | error
+    created_at  = Column(DateTime(timezone=True), server_default=func.now())

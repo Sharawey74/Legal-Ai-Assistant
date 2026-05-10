@@ -1,30 +1,25 @@
-from pydantic import BaseModel, EmailStr, field_validator
+from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 
 class RegisterRequest(BaseModel):
-    email: EmailStr
+    email:    EmailStr
     password: str
-
-    @field_validator("password")
-    @classmethod
-    def password_min_length(cls, v: str) -> str:
-        if len(v) < 6:
-            raise ValueError("Password must be at least 6 characters")
-        return v
 
 
 class LoginRequest(BaseModel):
-    email: EmailStr
+    email:    EmailStr
     password: str
 
 
 class TokenResponse(BaseModel):
     access_token: str
-    token_type: str = "bearer"
+    token_type:   str = "bearer"
 
 
 class UserResponse(BaseModel):
-    id: str
-    email: str
+    id:         str
+    email:      EmailStr
+    created_at: datetime
 
     model_config = {"from_attributes": True}
